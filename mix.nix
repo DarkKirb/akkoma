@@ -130,12 +130,12 @@
 
     certifi = buildRebar3 rec {
       name = "certifi";
-      version = "2.9.0";
+      version = "2.12.0";
 
       src = fetchHex {
         pkg = "certifi";
         version = "${version}";
-        sha256 = "266da46bdb06d6c6d35fde799bcb28d36d985d424ad7c08b5bb48f5b5cdd4641";
+        sha256 = "ee68d85df22e554040cdb4be100f33873ac6051387baf6a8f6ce82272340ff1c";
       };
 
       beamDeps = [];
@@ -546,15 +546,15 @@
 
     excoveralls = buildMix rec {
       name = "excoveralls";
-      version = "0.16.1";
+      version = "0.18.0";
 
       src = fetchHex {
         pkg = "excoveralls";
         version = "${version}";
-        sha256 = "dae763468e2008cf7075a64cb1249c97cb4bc71e236c5c2b5e5cdf1cfa2bf138";
+        sha256 = "1109bb911f3cb583401760be49c02cbbd16aed66ea9509fc5479335d284da60b";
       };
 
-      beamDeps = [hackney jason];
+      beamDeps = [castore jason];
     };
 
     expo = buildMix rec {
@@ -676,12 +676,12 @@
 
     hackney = buildRebar3 rec {
       name = "hackney";
-      version = "1.18.1";
+      version = "1.20.1";
 
       src = fetchHex {
         pkg = "hackney";
         version = "${version}";
-        sha256 = "a4ecdaff44297e9b5894ae499e9a070ea1888c84afdd1fd9b7b2bc384950128e";
+        sha256 = "fe9094e5f1a2a2c0a7d10918fee36bfec0ec2a979994cff8cfe8058cd9af38e3";
       };
 
       beamDeps = [certifi idna metrics mimerl parse_trans ssl_verify_fun unicode_util_compat];
@@ -1027,12 +1027,12 @@
 
     parse_trans = buildRebar3 rec {
       name = "parse_trans";
-      version = "3.3.1";
+      version = "3.4.1";
 
       src = fetchHex {
         pkg = "parse_trans";
         version = "${version}";
-        sha256 = "07cd9577885f56362d414e8c4c4e6bdf10d43a8767abb92d24cbe8b24c54888b";
+        sha256 = "620a406ce75dada827b82e453c19cf06776be266f5a67cff34e1ef2cbb60e49a";
       };
 
       beamDeps = [];
