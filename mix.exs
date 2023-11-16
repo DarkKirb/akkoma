@@ -202,7 +202,7 @@ defmodule Pleroma.Mixfile do
       {:ex_machina, "~> 2.7", only: :test},
       {:credo, "~> 1.7", only: [:dev, :test], runtime: false},
       {:mock, "~> 0.3.8", only: :test},
-      {:excoveralls, "0.16.1", only: :test},
+      {:excoveralls, "0.18.0", only: :test},
       {:mox, "~> 1.0", only: :test},
       {:websockex, "~> 0.4.3", only: :test},
       {:dialyxir, "~> 1.3", only: [:dev], runtime: false},

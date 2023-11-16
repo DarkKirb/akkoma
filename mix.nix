@@ -546,15 +546,15 @@
 
     excoveralls = buildMix rec {
       name = "excoveralls";
-      version = "0.16.1";
+      version = "0.18.0";
 
       src = fetchHex {
         pkg = "excoveralls";
         version = "${version}";
-        sha256 = "dae763468e2008cf7075a64cb1249c97cb4bc71e236c5c2b5e5cdf1cfa2bf138";
+        sha256 = "1109bb911f3cb583401760be49c02cbbd16aed66ea9509fc5479335d284da60b";
       };
 
-      beamDeps = [hackney jason];
+      beamDeps = [castore jason];
     };
 
     expo = buildMix rec {
