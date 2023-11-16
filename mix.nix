@@ -1053,12 +1053,12 @@
 
     phoenix_ecto = buildMix rec {
       name = "phoenix_ecto";
-      version = "4.4.2";
+      version = "4.4.3";
 
       src = fetchHex {
         pkg = "phoenix_ecto";
         version = "${version}";
-        sha256 = "70242edd4601d50b69273b057ecf7b684644c19ee750989fd555625ae4ce8f5d";
+        sha256 = "d36c401206f3011fefd63d04e8ef626ec8791975d9d107f9a0817d426f61ac07";
       };
 
       beamDeps = [ecto phoenix_html plug];
@@ -1066,12 +1066,12 @@
 
     phoenix_html = buildMix rec {
       name = "phoenix_html";
-      version = "3.3.2";
+      version = "3.3.3";
 
       src = fetchHex {
         pkg = "phoenix_html";
         version = "${version}";
-        sha256 = "44adaf8e667c1c20fb9d284b6b0fa8dc7946ce29e81ce621860aa7e96de9a11d";
+        sha256 = "923ebe6fec6e2e3b3e569dfbdc6560de932cd54b000ada0208b5f45024bdd76c";
       };
 
       beamDeps = [plug];
@@ -1157,12 +1157,12 @@
 
     plug = buildMix rec {
       name = "plug";
-      version = "1.14.2";
+      version = "1.15.2";
 
       src = fetchHex {
         pkg = "plug";
         version = "${version}";
-        sha256 = "842fc50187e13cf4ac3b253d47d9474ed6c296a8732752835ce4a86acdf68d13";
+        sha256 = "02731fa0c2dcb03d8d21a1d941bdbbe99c2946c0db098eee31008e04c6283615";
       };
 
       beamDeps = [mime plug_crypto telemetry];
