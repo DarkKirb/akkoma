@@ -1,0 +1,41 @@
+{
+    "enabled": 1,
+    "hidden": false,
+    "description": "jobsets",
+    "nixexprinput": "akkoma",
+    "nixexprpath": "hydra/jobsets.nix",
+    "checkinterval": 3600,
+    "schedulingshares": 100,
+    "enableemail": false,
+    "emailoverride": "",
+    "keepnr": 1,
+    "inputs": {
+        "akkoma": {
+            "type": "git",
+            "value": "https://github.com/DarkKirb/akkoma.git develop",
+            "emailresponsible": false
+        },
+        "nixpkgs": {
+            "type": "git",
+            "value": "https://github.com/NixOS/nixpkgs.git",
+            "emailresponsible": false
+        },
+        "prsJSON": {
+            "type": "githubpulls",
+            "value": "DarkKirb akkoma",
+            "emailresponsible": false
+        },
+        "github_input": {
+            "type": "string",
+            "value": "akkoma"
+        },
+        "github_repo_owner": {
+            "type": "string",
+            "value": "DarkKirb"
+        },
+        "github_repo_name": {
+            "type": "string",
+            "value": "akkoma"
+        }
+    }
+}

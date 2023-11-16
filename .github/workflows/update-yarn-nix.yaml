@@ -1,0 +1,26 @@
+name: Automatically update mix.nix
+on:
+  push:
+    paths:
+      - "**/mix.exs"
+      - "**/mix.lock"
+  workflow_dispatch: {}
+permissions:
+  contents: write
+jobs:
+  update-cargo-nix:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: cachix/install-nix-action@v23
+        with:
+          extra_nix_config: |
+            trusted-public-keys = nixcache:8KKuGz95Pk4UJ5W/Ni+pN+v+LDTkMMFV4yrGmAYgkDg= cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY=
+            substituters = https://f000.backblazeb2.com/file/cache-chir-rs/ https://cache.nixos.org/
+      - run: nix run github:nixos/nixpkgs#mix2nix > mix.nix
+      - run: nix fmt
+      - run: git add mix.nix
+      - run: git config user.email autoupdate@chir.rs
+      - run: git config user.name "Autoupdater"
+      - run: git commit -am "Automatic mix.nix update" || true
+      - run: git push

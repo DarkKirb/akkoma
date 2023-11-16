@@ -1,0 +1,19 @@
+name: Sync fork
+
+on:
+  schedule:
+    - cron: '32 20 * * *' # 20:32 UTC
+  workflow_dispatch: # on button click
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - run: git remote add upstream https://akkoma.dev/AkkomaGang/akkoma.git
+      - run: git fetch upstream
+      - run: git reset --hard upstream/develop
+      - uses: peter-evans/create-pull-request@v5
+        with:
+          author: GitHub <noreply@github.com>
