@@ -1339,12 +1339,12 @@
 
     sweet_xml = buildMix rec {
       name = "sweet_xml";
-      version = "0.7.3";
+      version = "0.7.4";
 
       src = fetchHex {
         pkg = "sweet_xml";
         version = "${version}";
-        sha256 = "e110c867a1b3fe74bfc7dd9893aa851f0eed5518d0d7cad76d7baafd30e4f5ba";
+        sha256 = "e7c4b0bdbf460c928234951def54fe87edf1a170f6896675443279e2dbeba167";
       };
 
       beamDeps = [];
