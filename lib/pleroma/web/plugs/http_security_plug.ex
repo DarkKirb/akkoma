@@ -116,7 +116,7 @@ defmodule Pleroma.Web.Plugs.HTTPSecurityPlug do
     style_src = "style-src 'self' '#{nonce_tag}'"
     font_src = "font-src 'self'"
 
-    script_src = "script-src 'self' '#{nonce_tag}' "
+    script_src = "script-src 'self' 'unsafe-eval' '#{nonce_tag}' "
 
     script_src =
       if @mix_env == :dev do
