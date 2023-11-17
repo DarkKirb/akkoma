@@ -260,12 +260,12 @@
 
     db_connection = buildMix rec {
       name = "db_connection";
-      version = "2.5.0";
+      version = "2.6.0";
 
       src = fetchHex {
         pkg = "db_connection";
         version = "${version}";
-        sha256 = "c92d5ba26cd69ead1ff7582dbb860adeedfff39774105a4f1c92cbb654b55aa2";
+        sha256 = "c2f992d15725e721ec7fbc1189d4ecdb8afef76648c746a8e1cad35e3b8a35f3";
       };
 
       beamDeps = [telemetry];
@@ -390,12 +390,12 @@
 
     ecto_sql = buildMix rec {
       name = "ecto_sql";
-      version = "3.10.1";
+      version = "3.10.2";
 
       src = fetchHex {
         pkg = "ecto_sql";
         version = "${version}";
-        sha256 = "f6a25bdbbd695f12c8171eaff0851fa4c8e72eec1e98c7364402dda9ce11c56b";
+        sha256 = "68c018debca57cb9235e3889affdaec7a10616a4e3a80c99fa1d01fdafaa9007";
       };
 
       beamDeps = [db_connection ecto postgrex telemetry];
@@ -1001,12 +1001,12 @@
 
     oban = buildMix rec {
       name = "oban";
-      version = "2.15.4";
+      version = "2.16.3";
 
       src = fetchHex {
         pkg = "oban";
         version = "${version}";
-        sha256 = "5fce611fdfffb13e9148df883116e5201adf1e731eb302cc88cde0588510079c";
+        sha256 = "4d8a7fb62f63cf2f2080c78954425f5fd8916ef57196b7f79b5bc657abb2ac5f";
       };
 
       beamDeps = [ecto_sql jason postgrex telemetry];
@@ -1235,12 +1235,12 @@
 
     postgrex = buildMix rec {
       name = "postgrex";
-      version = "0.17.2";
+      version = "0.17.3";
 
       src = fetchHex {
         pkg = "postgrex";
         version = "${version}";
-        sha256 = "80a918a9e9531d39f7bd70621422f3ebc93c01618c645f2d91306f50041ed90c";
+        sha256 = "946cf46935a4fdca7a81448be76ba3503cff082df42c6ec1ff16a4bdfbfb098d";
       };
 
       beamDeps = [db_connection decimal jason];
