@@ -1144,12 +1144,12 @@
 
     phoenix_view = buildMix rec {
       name = "phoenix_view";
-      version = "2.0.2";
+      version = "2.0.3";
 
       src = fetchHex {
         pkg = "phoenix_view";
         version = "${version}";
-        sha256 = "a929e7230ea5c7ee0e149ffcf44ce7cf7f4b6d2bfe1752dd7c084cdff152d36f";
+        sha256 = "cd34049af41be2c627df99cd4eaa71fc52a328c0c3d8e7d4aa28f880c30e7f64";
       };
 
       beamDeps = [phoenix_html phoenix_template];
