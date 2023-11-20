@@ -1274,12 +1274,12 @@
 
     recon = buildMix rec {
       name = "recon";
-      version = "2.5.3";
+      version = "2.5.4";
 
       src = fetchHex {
         pkg = "recon";
         version = "${version}";
-        sha256 = "6c6683f46fd4a1dfd98404b9f78dcabc7fcd8826613a89dcb984727a8c3099d7";
+        sha256 = "e9ab01ac7fc8572e41eb59385efeb3fb0ff5bf02103816535bacaedf327d0263";
       };
 
       beamDeps = [];
