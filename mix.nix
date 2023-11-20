@@ -949,12 +949,12 @@
 
     mox = buildMix rec {
       name = "mox";
-      version = "1.0.2";
+      version = "1.1.0";
 
       src = fetchHex {
         pkg = "mox";
         version = "${version}";
-        sha256 = "f9864921b3aaf763c8741b5b8e6f908f44566f1e427b2630e89e9a73b981fef2";
+        sha256 = "d44474c50be02d5b72131070281a5d3895c0e7a95c780e90bc0cfe712f633a13";
       };
 
       beamDeps = [];
