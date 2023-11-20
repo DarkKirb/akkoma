@@ -663,12 +663,12 @@
 
     gettext = buildMix rec {
       name = "gettext";
-      version = "0.22.3";
+      version = "0.23.1";
 
       src = fetchHex {
         pkg = "gettext";
         version = "${version}";
-        sha256 = "935f23447713954a6866f1bb28c3a878c4c011e802bcd68a726f5e558e4b64bd";
+        sha256 = "19d744a36b809d810d610b57c27b934425859d158ebd56561bc41f7eeb8795db";
       };
 
       beamDeps = [expo];
