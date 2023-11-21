@@ -975,12 +975,12 @@
 
     nimble_parsec = buildMix rec {
       name = "nimble_parsec";
-      version = "1.3.1";
+      version = "1.4.0";
 
       src = fetchHex {
         pkg = "nimble_parsec";
         version = "${version}";
-        sha256 = "2682e3c0b2eb58d90c6375fc0cc30bc7be06f365bf72608804fb9cffa5e1b167";
+        sha256 = "9c565862810fb383e9838c1dd2d7d2c437b3d13b267414ba6af33e50d2d1cf28";
       };
 
       beamDeps = [];
