@@ -65,12 +65,12 @@
 
     benchee = buildMix rec {
       name = "benchee";
-      version = "1.1.0";
+      version = "1.2.0";
 
       src = fetchHex {
         pkg = "benchee";
         version = "${version}";
-        sha256 = "7da57d545003165a012b587077f6ba90b89210fd88074ce3c60ce239eb5e6d93";
+        sha256 = "ee729e53217898b8fd30aaad3cce61973dab61574ae6f48229fe7ff42d5e4457";
       };
 
       beamDeps = [deep_merge statistex];
