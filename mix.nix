@@ -117,12 +117,12 @@
 
     castore = buildMix rec {
       name = "castore";
-      version = "1.0.3";
+      version = "1.0.4";
 
       src = fetchHex {
         pkg = "castore";
         version = "${version}";
-        sha256 = "680ab01ef5d15b161ed6a95449fac5c6b8f60055677a8e79acf01b27baa4390b";
+        sha256 = "9418c1b8144e11656f0be99943db4caf04612e3eaecefb5dae9a2a87565584f8";
       };
 
       beamDeps = [];
@@ -1352,15 +1352,15 @@
 
     swoosh = buildMix rec {
       name = "swoosh";
-      version = "1.11.5";
+      version = "1.14.1";
 
       src = fetchHex {
         pkg = "swoosh";
         version = "${version}";
-        sha256 = "21ee57dcd68d2f56d3bbe11e76d56d142b221bb12b6018c551cc68442b800040";
+        sha256 = "87da72260b4351678f96aec61db5c2acc8a88cda2cf2c4f534eb4c9c461350c7";
       };
 
-      beamDeps = [cowboy ex_aws finch gen_smtp hackney jason mail mime plug_cowboy telemetry];
+      beamDeps = [cowboy ex_aws finch gen_smtp hackney jason mail mime plug plug_cowboy telemetry];
     };
 
     syslog = buildRebar3 rec {
