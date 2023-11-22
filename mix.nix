@@ -117,12 +117,12 @@
 
     castore = buildMix rec {
       name = "castore";
-      version = "1.0.3";
+      version = "1.0.4";
 
       src = fetchHex {
         pkg = "castore";
         version = "${version}";
-        sha256 = "680ab01ef5d15b161ed6a95449fac5c6b8f60055677a8e79acf01b27baa4390b";
+        sha256 = "9418c1b8144e11656f0be99943db4caf04612e3eaecefb5dae9a2a87565584f8";
       };
 
       beamDeps = [];
@@ -1456,12 +1456,12 @@
 
     tesla = buildMix rec {
       name = "tesla";
-      version = "1.7.0";
+      version = "1.8.0";
 
       src = fetchHex {
         pkg = "tesla";
         version = "${version}";
-        sha256 = "2e64f01ebfdb026209b47bc651a0e65203fcff4ae79c11efb73c4852b00dc313";
+        sha256 = "10501f360cd926a309501287470372af1a6e1cbed0f43949203a4c13300bc79f";
       };
 
       beamDeps = [castore finch hackney jason mime mint poison telemetry];
