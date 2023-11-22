@@ -27,7 +27,7 @@
         ];
         packages.akkoma = pkgs.callPackage ./package.nix {inherit inputs;};
         formatter = pkgs.alejandra;
-        checks.akkoma = import ./test inputs args;
+        checks.akkoma = import ./test/nixpkgs.nix inputs args;
       };
       flake = {
         hydraJobs = {
