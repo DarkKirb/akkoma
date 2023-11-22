@@ -312,15 +312,15 @@
 
     earmark = buildMix rec {
       name = "earmark";
-      version = "1.4.39";
+      version = "1.4.46";
 
       src = fetchHex {
         pkg = "earmark";
         version = "${version}";
-        sha256 = "156c9d8ec3cbeccdbf26216d8247bdeeacc8c76b4d9eee7554be2f1b623ea440";
+        sha256 = "798d86db3d79964e759ddc0c077d5eb254968ed426399fbf5a62de2b5ff8910a";
       };
 
-      beamDeps = [earmark_parser];
+      beamDeps = [];
     };
 
     earmark_parser = buildMix rec {
