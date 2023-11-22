@@ -31,7 +31,9 @@
       };
       flake = {
         hydraJobs = {
-          inherit (inputs.self) devShells packages formatter checks;
+          inherit (inputs.self) devShells packages formatter;
+
+          inherit (inputs.self.checks) x86_64-linux;
         };
       };
     };
