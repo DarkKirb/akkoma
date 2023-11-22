@@ -5,7 +5,8 @@ Based in part on nixos/tests/pleroma.
 
 TODO: Test federation.
 */
-inputs: import "${inputs.nixpkgs}/nixos/tests/make-test-python.nix" ({
+inputs:
+import "${inputs.nixpkgs}/nixos/tests/make-test-python.nix" ({
   pkgs,
   confined ? false,
   ...
