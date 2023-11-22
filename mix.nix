@@ -52,12 +52,12 @@
 
     bcrypt_elixir = buildMix rec {
       name = "bcrypt_elixir";
-      version = "3.0.1";
+      version = "3.1.0";
 
       src = fetchHex {
         pkg = "bcrypt_elixir";
         version = "${version}";
-        sha256 = "486bb95efb645d1efc6794c1ddd776a186a9a713abf06f45708a6ce324fb96cf";
+        sha256 = "2ad2acb5a8bc049e8d5aa267802631912bb80d5f4110a178ae7999e69dca1bf7";
       };
 
       beamDeps = [comeonin elixir_make];
@@ -117,12 +117,12 @@
 
     castore = buildMix rec {
       name = "castore";
-      version = "1.0.3";
+      version = "1.0.4";
 
       src = fetchHex {
         pkg = "castore";
         version = "${version}";
-        sha256 = "680ab01ef5d15b161ed6a95449fac5c6b8f60055677a8e79acf01b27baa4390b";
+        sha256 = "9418c1b8144e11656f0be99943db4caf04612e3eaecefb5dae9a2a87565584f8";
       };
 
       beamDeps = [];
@@ -156,12 +156,12 @@
 
     comeonin = buildMix rec {
       name = "comeonin";
-      version = "5.3.3";
+      version = "5.4.0";
 
       src = fetchHex {
         pkg = "comeonin";
         version = "${version}";
-        sha256 = "3e38c9c2cb080828116597ca8807bb482618a315bfafd98c90bc22a821cc84df";
+        sha256 = "796393a9e50d01999d56b7b8420ab0481a7538d0caf80919da493b4a6e51faf1";
       };
 
       beamDeps = [];
