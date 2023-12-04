@@ -13,12 +13,12 @@
   with self; {
     argon2_elixir = buildMix rec {
       name = "argon2_elixir";
-      version = "3.1.0";
+      version = "4.0.0";
 
       src = fetchHex {
         pkg = "argon2_elixir";
         version = "${version}";
-        sha256 = "c08feae0ee0292165d1b945003363c7cd8523d002e0483c627dfca930291dd73";
+        sha256 = "f9da27cf060c9ea61b1bd47837a28d7e48a8f6fa13a745e252556c14f9132c7f";
       };
 
       beamDeps = [comeonin elixir_make];
