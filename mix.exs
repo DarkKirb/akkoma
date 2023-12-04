@@ -145,7 +145,7 @@ defmodule Pleroma.Mixfile do
       {:sweet_xml, "~> 0.7"},
       {:earmark, "~> 1.4"},
       {:bbcode_pleroma, "~> 0.2.0"},
-      {:argon2_elixir, "~> 3.1"},
+      {:argon2_elixir, "~> 4.0"},
       {:cors_plug, "~> 3.0"},
       {:web_push_encryption, "~> 0.3.1"},
       {:swoosh, "~> 1.11"},
