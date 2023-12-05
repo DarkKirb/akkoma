@@ -559,12 +559,12 @@
 
     expo = buildMix rec {
       name = "expo";
-      version = "0.4.1";
+      version = "0.5.1";
 
       src = fetchHex {
         pkg = "expo";
         version = "${version}";
-        sha256 = "2ff7ba7a798c8c543c12550fa0e2cbc81b95d4974c65855d8d15ba7b37a1ce47";
+        sha256 = "68a4233b0658a3d12ee00d27d37d856b1ba48607e7ce20fd376958d0ba6ce92b";
       };
 
       beamDeps = [];
@@ -663,12 +663,12 @@
 
     gettext = buildMix rec {
       name = "gettext";
-      version = "0.23.1";
+      version = "0.24.0";
 
       src = fetchHex {
         pkg = "gettext";
         version = "${version}";
-        sha256 = "19d744a36b809d810d610b57c27b934425859d158ebd56561bc41f7eeb8795db";
+        sha256 = "bdf75cdfcbe9e4622dd18e034b227d77dd17f0f133853a1c73b97b3d6c770e8b";
       };
 
       beamDeps = [expo];
@@ -1235,12 +1235,12 @@
 
     postgrex = buildMix rec {
       name = "postgrex";
-      version = "0.17.3";
+      version = "0.17.4";
 
       src = fetchHex {
         pkg = "postgrex";
         version = "${version}";
-        sha256 = "946cf46935a4fdca7a81448be76ba3503cff082df42c6ec1ff16a4bdfbfb098d";
+        sha256 = "6458f7d5b70652bc81c3ea759f91736c16a31be000f306d3c64bcdfe9a18b3cc";
       };
 
       beamDeps = [db_connection decimal jason];
@@ -1508,12 +1508,12 @@
 
     ueberauth = buildMix rec {
       name = "ueberauth";
-      version = "0.10.5";
+      version = "0.10.6";
 
       src = fetchHex {
         pkg = "ueberauth";
         version = "${version}";
-        sha256 = "3efd1f31d490a125c7ed453b926f7c31d78b97b8a854c755f5c40064bf3ac9e1";
+        sha256 = "b0ad1c7508f3cfd5c2c1c668d1a32bafd77de4c56af82c7bfd7e54ed078a7928";
       };
 
       beamDeps = [plug];
