@@ -325,12 +325,12 @@
 
     earmark_parser = buildMix rec {
       name = "earmark_parser";
-      version = "1.4.38";
+      version = "1.4.39";
 
       src = fetchHex {
         pkg = "earmark_parser";
         version = "${version}";
-        sha256 = "2cd0907795aaef0c7e8442e376633c5b3bd6edc8dbbdc539b22f095501c1cdb6";
+        sha256 = "06553a88d1f1846da9ef066b87b57c6f605552cfbe40d20bd8d59cc6bde41944";
       };
 
       beamDeps = [];
@@ -507,12 +507,12 @@
 
     ex_doc = buildMix rec {
       name = "ex_doc";
-      version = "0.30.9";
+      version = "0.31.0";
 
       src = fetchHex {
         pkg = "ex_doc";
         version = "${version}";
-        sha256 = "d7aaaf21e95dc5cddabf89063327e96867d00013963eadf2c6ad135506a8bc10";
+        sha256 = "5350cafa6b7f77bdd107aa2199fe277acf29d739aba5aee7e865fc680c62a110";
       };
 
       beamDeps = [earmark_parser makeup_elixir makeup_erlang];
@@ -845,12 +845,12 @@
 
     makeup_erlang = buildMix rec {
       name = "makeup_erlang";
-      version = "0.1.2";
+      version = "0.1.3";
 
       src = fetchHex {
         pkg = "makeup_erlang";
         version = "${version}";
-        sha256 = "f3f5a1ca93ce6e092d92b6d9c049bcda58a3b617a8d888f8e7231c85630e8108";
+        sha256 = "b78dc853d2e670ff6390b605d807263bf606da3c82be37f9d7f68635bd886fc9";
       };
 
       beamDeps = [makeup];
