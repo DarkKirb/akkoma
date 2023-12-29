@@ -299,12 +299,12 @@
 
     dialyxir = buildMix rec {
       name = "dialyxir";
-      version = "1.4.2";
+      version = "1.4.3";
 
       src = fetchHex {
         pkg = "dialyxir";
         version = "${version}";
-        sha256 = "516603d8067b2fd585319e4b13d3674ad4f314a5902ba8130cd97dc902ce6bbd";
+        sha256 = "bf2cfb75cd5c5006bec30141b131663299c661a864ec7fbbc72dfa557487a986";
       };
 
       beamDeps = [erlex];
