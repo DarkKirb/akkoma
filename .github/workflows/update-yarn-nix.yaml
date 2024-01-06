@@ -15,8 +15,9 @@ jobs:
       - uses: cachix/install-nix-action@v24
         with:
           extra_nix_config: |
-            trusted-public-keys = nixcache:8KKuGz95Pk4UJ5W/Ni+pN+v+LDTkMMFV4yrGmAYgkDg= cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY=
-            substituters = https://f000.backblazeb2.com/file/cache-chir-rs/ https://cache.nixos.org/
+            substituters = https://attic.chir.rs/chir-rs/ https://hydra.int.chir.rs https://cache.nixos.org
+            trusted-public-keys = cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY= nixcache:8KKuGz95Pk4UJ5W/Ni+pN+v+LDTkMMFV4yrGmAYgkDg= chir-rs:rzK1Czm3RqBbZLnXYrLM6JyOhfr6Z/8lhACIPO/LNFQ=
+            experimental-features = nix-command flakes ca-derivations
       - run: nix run github:nixos/nixpkgs#mix2nix > mix.nix
       - run: nix fmt
       - run: git add mix.nix
