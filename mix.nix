@@ -611,12 +611,12 @@
 
     finch = buildMix rec {
       name = "finch";
-      version = "0.16.0";
+      version = "0.17.0";
 
       src = fetchHex {
         pkg = "finch";
         version = "${version}";
-        sha256 = "f660174c4d519e5fec629016054d60edd822cdfe2b7270836739ac2f97735ec5";
+        sha256 = "8d014a661bb6a437263d4b5abf0bcbd3cf0deb26b1e8596f2a271d22e48934c7";
       };
 
       beamDeps = [castore mime mint nimble_options nimble_pool telemetry];
