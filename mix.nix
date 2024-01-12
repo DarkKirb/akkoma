@@ -1404,12 +1404,12 @@
 
     telemetry_metrics = buildMix rec {
       name = "telemetry_metrics";
-      version = "0.6.1";
+      version = "0.6.2";
 
       src = fetchHex {
         pkg = "telemetry_metrics";
         version = "${version}";
-        sha256 = "7be9e0871c41732c233be71e4be11b96e56177bf15dde64a8ac9ce72ac9834c6";
+        sha256 = "9b43db0dc33863930b9ef9d27137e78974756f5f198cae18409970ed6fa5b561";
       };
 
       beamDeps = [telemetry];
