@@ -507,12 +507,12 @@
 
     ex_doc = buildMix rec {
       name = "ex_doc";
-      version = "0.31.0";
+      version = "0.31.1";
 
       src = fetchHex {
         pkg = "ex_doc";
         version = "${version}";
-        sha256 = "5350cafa6b7f77bdd107aa2199fe277acf29d739aba5aee7e865fc680c62a110";
+        sha256 = "3178c3a407c557d8343479e1ff117a96fd31bafe52a039079593fb0524ef61b0";
       };
 
       beamDeps = [earmark_parser makeup_elixir makeup_erlang];
