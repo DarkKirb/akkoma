@@ -38,7 +38,7 @@
         ];
         packages.akkoma = pkgs.akkoma;
         formatter = pkgs.alejandra;
-        #checks.akkoma = import ./test/nixpkgs.nix inputs args;
+        checks.akkoma = import ./test/nixpkgs.nix inputs args;
       };
       flake = {
         hydraJobs = {
