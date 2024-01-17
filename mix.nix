@@ -234,12 +234,12 @@
 
     credo = buildMix rec {
       name = "credo";
-      version = "1.7.2";
+      version = "1.7.3";
 
       src = fetchHex {
         pkg = "credo";
         version = "${version}";
-        sha256 = "dd15d6fbc280f6cf9b269f41df4e4992dee6615939653b164ef951f60afcb68e";
+        sha256 = "35ea675a094c934c22fb1dca3696f3c31f2728ae6ef5a53b5d648c11180a4535";
       };
 
       beamDeps = [bunt file_system jason];
@@ -507,12 +507,12 @@
 
     ex_doc = buildMix rec {
       name = "ex_doc";
-      version = "0.31.0";
+      version = "0.31.1";
 
       src = fetchHex {
         pkg = "ex_doc";
         version = "${version}";
-        sha256 = "5350cafa6b7f77bdd107aa2199fe277acf29d739aba5aee7e865fc680c62a110";
+        sha256 = "3178c3a407c557d8343479e1ff117a96fd31bafe52a039079593fb0524ef61b0";
       };
 
       beamDeps = [earmark_parser makeup_elixir makeup_erlang];
@@ -611,12 +611,12 @@
 
     finch = buildMix rec {
       name = "finch";
-      version = "0.16.0";
+      version = "0.17.0";
 
       src = fetchHex {
         pkg = "finch";
         version = "${version}";
-        sha256 = "f660174c4d519e5fec629016054d60edd822cdfe2b7270836739ac2f97735ec5";
+        sha256 = "8d014a661bb6a437263d4b5abf0bcbd3cf0deb26b1e8596f2a271d22e48934c7";
       };
 
       beamDeps = [castore mime mint nimble_options nimble_pool telemetry];
