@@ -741,12 +741,12 @@
 
     inet_cidr = buildMix rec {
       name = "inet_cidr";
-      version = "1.0.4";
+      version = "1.0.8";
 
       src = fetchHex {
         pkg = "inet_cidr";
         version = "${version}";
-        sha256 = "64a2d30189704ae41ca7dbdd587f5291db5d1dda1414e0774c29ffc81088c1bc";
+        sha256 = "d5b26da66603bb56c933c65214c72152f0de9a6ea53618b56d63302a68f6a90e";
       };
 
       beamDeps = [];
