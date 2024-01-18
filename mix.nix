@@ -1352,12 +1352,12 @@
 
     swoosh = buildMix rec {
       name = "swoosh";
-      version = "1.14.3";
+      version = "1.14.4";
 
       src = fetchHex {
         pkg = "swoosh";
         version = "${version}";
-        sha256 = "6c565103fc8f086bdd96e5c948660af8e20922b7a90a75db261f06a34f805c8b";
+        sha256 = "081c5a590e4ba85cc89baddf7b2beecf6c13f7f84a958f1cd969290815f0f026";
       };
 
       beamDeps = [cowboy ex_aws finch gen_smtp hackney jason mail mime plug plug_cowboy telemetry];
