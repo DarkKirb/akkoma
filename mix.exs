@@ -164,7 +164,7 @@ defmodule Pleroma.Mixfile do
       {:telemetry, "~> 1.2"},
       {:telemetry_poller, "~> 1.0"},
       {:telemetry_metrics, "~> 0.6"},
-      {:telemetry_metrics_prometheus_core, "~> 1.1.0"},
+      {:telemetry_metrics_prometheus_core, "~> 1.2.0"},
       {:poolboy, "~> 1.5"},
       {:recon, "~> 2.5"},
       {:joken, "~> 2.6"},
