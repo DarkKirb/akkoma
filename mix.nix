@@ -481,12 +481,12 @@
 
     ex_aws_s3 = buildMix rec {
       name = "ex_aws_s3";
-      version = "2.5.2";
+      version = "2.5.3";
 
       src = fetchHex {
         pkg = "ex_aws_s3";
         version = "${version}";
-        sha256 = "cc5bd945a22a99eece4721d734ae2452d3717e81c357a781c8574663254df4a1";
+        sha256 = "4f09dd372cc386550e484808c5ac5027766c8d0cd8271ccc578b82ee6ef4f3b8";
       };
 
       beamDeps = [ex_aws sweet_xml];
