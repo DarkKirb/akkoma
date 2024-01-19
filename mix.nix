@@ -741,12 +741,12 @@
 
     inet_cidr = buildMix rec {
       name = "inet_cidr";
-      version = "1.0.4";
+      version = "1.0.8";
 
       src = fetchHex {
         pkg = "inet_cidr";
         version = "${version}";
-        sha256 = "64a2d30189704ae41ca7dbdd587f5291db5d1dda1414e0774c29ffc81088c1bc";
+        sha256 = "d5b26da66603bb56c933c65214c72152f0de9a6ea53618b56d63302a68f6a90e";
       };
 
       beamDeps = [];
@@ -1001,12 +1001,12 @@
 
     oban = buildMix rec {
       name = "oban";
-      version = "2.17.1";
+      version = "2.17.2";
 
       src = fetchHex {
         pkg = "oban";
         version = "${version}";
-        sha256 = "c02686ada7979b00e259c0efbafeae2749f8209747b3460001fe695c5bdbeee6";
+        sha256 = "de90489c05c039a6d942fa54d8fa13b858db315da2178e4e2c35c82c0a3ab556";
       };
 
       beamDeps = [ecto_sql jason postgrex telemetry];
@@ -1352,12 +1352,12 @@
 
     swoosh = buildMix rec {
       name = "swoosh";
-      version = "1.14.3";
+      version = "1.14.4";
 
       src = fetchHex {
         pkg = "swoosh";
         version = "${version}";
-        sha256 = "6c565103fc8f086bdd96e5c948660af8e20922b7a90a75db261f06a34f805c8b";
+        sha256 = "081c5a590e4ba85cc89baddf7b2beecf6c13f7f84a958f1cd969290815f0f026";
       };
 
       beamDeps = [cowboy ex_aws finch gen_smtp hackney jason mail mime plug plug_cowboy telemetry];
@@ -1404,12 +1404,12 @@
 
     telemetry_metrics = buildMix rec {
       name = "telemetry_metrics";
-      version = "0.6.1";
+      version = "0.6.2";
 
       src = fetchHex {
         pkg = "telemetry_metrics";
         version = "${version}";
-        sha256 = "7be9e0871c41732c233be71e4be11b96e56177bf15dde64a8ac9ce72ac9834c6";
+        sha256 = "9b43db0dc33863930b9ef9d27137e78974756f5f198cae18409970ed6fa5b561";
       };
 
       beamDeps = [telemetry];
@@ -1430,12 +1430,12 @@
 
     telemetry_metrics_prometheus_core = buildMix rec {
       name = "telemetry_metrics_prometheus_core";
-      version = "1.1.0";
+      version = "1.2.0";
 
       src = fetchHex {
         pkg = "telemetry_metrics_prometheus_core";
         version = "${version}";
-        sha256 = "0dd10e7fe8070095df063798f82709b0a1224c31b8baf6278b423898d591a069";
+        sha256 = "9cba950e1c4733468efbe3f821841f34ac05d28e7af7798622f88ecdbbe63ea3";
       };
 
       beamDeps = [telemetry telemetry_metrics];
