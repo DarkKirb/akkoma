@@ -1170,12 +1170,12 @@
 
     plug_cowboy = buildMix rec {
       name = "plug_cowboy";
-      version = "2.6.1";
+      version = "2.6.2";
 
       src = fetchHex {
         pkg = "plug_cowboy";
         version = "${version}";
-        sha256 = "de36e1a21f451a18b790f37765db198075c25875c64834bcc82d90b309eb6613";
+        sha256 = "951ed2433df22f4c97b85fdb145d4cee561f36b74854d64c06d896d7cd2921a7";
       };
 
       beamDeps = [cowboy cowboy_telemetry plug];
