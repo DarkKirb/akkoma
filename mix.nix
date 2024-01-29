@@ -1014,12 +1014,12 @@
 
     open_api_spex = buildMix rec {
       name = "open_api_spex";
-      version = "3.18.1";
+      version = "3.18.2";
 
       src = fetchHex {
         pkg = "open_api_spex";
         version = "${version}";
-        sha256 = "f52933cddecca675e42ead660379ae2d3853f57f5a35d201eaed85e2e81517d1";
+        sha256 = "aa3e6dcfc0ad6a02596b2172662da21c9dd848dac145ea9e603f54e3d81b8d2b";
       };
 
       beamDeps = [jason plug poison];
