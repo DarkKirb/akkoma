@@ -637,12 +637,12 @@
 
     floki = buildMix rec {
       name = "floki";
-      version = "0.35.2";
+      version = "0.35.3";
 
       src = fetchHex {
         pkg = "floki";
         version = "${version}";
-        sha256 = "6b05289a8e9eac475f644f09c2e4ba7e19201fd002b89c28c1293e7bd16773d9";
+        sha256 = "6d9f07f3fc76599f3b66c39f4a81ac62c8f4d9631140268db92aacad5d0e56d4";
       };
 
       beamDeps = [];
@@ -1014,12 +1014,12 @@
 
     open_api_spex = buildMix rec {
       name = "open_api_spex";
-      version = "3.18.1";
+      version = "3.18.2";
 
       src = fetchHex {
         pkg = "open_api_spex";
         version = "${version}";
-        sha256 = "f52933cddecca675e42ead660379ae2d3853f57f5a35d201eaed85e2e81517d1";
+        sha256 = "aa3e6dcfc0ad6a02596b2172662da21c9dd848dac145ea9e603f54e3d81b8d2b";
       };
 
       beamDeps = [jason plug poison];
@@ -1170,12 +1170,12 @@
 
     plug_cowboy = buildMix rec {
       name = "plug_cowboy";
-      version = "2.6.2";
+      version = "2.7.0";
 
       src = fetchHex {
         pkg = "plug_cowboy";
         version = "${version}";
-        sha256 = "951ed2433df22f4c97b85fdb145d4cee561f36b74854d64c06d896d7cd2921a7";
+        sha256 = "d85444fb8aa1f2fc62eabe83bbe387d81510d773886774ebdcb429b3da3c1a4a";
       };
 
       beamDeps = [cowboy cowboy_telemetry plug];
@@ -1352,12 +1352,12 @@
 
     swoosh = buildMix rec {
       name = "swoosh";
-      version = "1.14.4";
+      version = "1.15.0";
 
       src = fetchHex {
         pkg = "swoosh";
         version = "${version}";
-        sha256 = "081c5a590e4ba85cc89baddf7b2beecf6c13f7f84a958f1cd969290815f0f026";
+        sha256 = "9700ab79dbbb0c69dcd30b80d6ec4b81a24f26934f8bc5ff8fdf6bd39f2ca769";
       };
 
       beamDeps = [cowboy ex_aws finch gen_smtp hackney jason mail mime plug plug_cowboy telemetry];
