@@ -416,12 +416,12 @@
 
     elixir_xml_to_map = buildMix rec {
       name = "elixir_xml_to_map";
-      version = "3.0.0";
+      version = "3.1.0";
 
       src = fetchHex {
         pkg = "elixir_xml_to_map";
         version = "${version}";
-        sha256 = "11222dd7f029f8db7a6662b41c992dbdb0e1c6e4fdea6a42056f9d27c847efbb";
+        sha256 = "8fe5f2e75f90bab07ee2161120c2dc038ebcae8135554f5582990f1c8c21f911";
       };
 
       beamDeps = [erlsom];
