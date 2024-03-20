@@ -117,12 +117,12 @@
 
     castore = buildMix rec {
       name = "castore";
-      version = "1.0.5";
+      version = "1.0.6";
 
       src = fetchHex {
         pkg = "castore";
         version = "${version}";
-        sha256 = "8d7c597c3e4a64c395980882d4bca3cebb8d74197c590dc272cfd3b6a6310578";
+        sha256 = "374c6e7ca752296be3d6780a6d5b922854ffcc74123da90f2f328996b962d33a";
       };
 
       beamDeps = [];
@@ -1040,12 +1040,12 @@
 
     phoenix = buildMix rec {
       name = "phoenix";
-      version = "1.7.10";
+      version = "1.7.11";
 
       src = fetchHex {
         pkg = "phoenix";
         version = "${version}";
-        sha256 = "cf784932e010fd736d656d7fead6a584a4498efefe5b8227e9f383bf15bb79d0";
+        sha256 = "b1ec57f2e40316b306708fe59b92a16b9f6f4bf50ccfa41aa8c7feb79e0ec02a";
       };
 
       beamDeps = [castore jason phoenix_pubsub phoenix_template phoenix_view plug plug_cowboy plug_crypto telemetry websock_adapter];
@@ -1131,12 +1131,12 @@
 
     phoenix_template = buildMix rec {
       name = "phoenix_template";
-      version = "1.0.3";
+      version = "1.0.4";
 
       src = fetchHex {
         pkg = "phoenix_template";
         version = "${version}";
-        sha256 = "16f4b6588a4152f3cc057b9d0c0ba7e82ee23afa65543da535313ad8d25d8e2c";
+        sha256 = "2c0c81f0e5c6753faf5cca2f229c9709919aba34fab866d3bc05060c9c444206";
       };
 
       beamDeps = [phoenix_html];
@@ -1157,12 +1157,12 @@
 
     plug = buildMix rec {
       name = "plug";
-      version = "1.15.2";
+      version = "1.15.3";
 
       src = fetchHex {
         pkg = "plug";
         version = "${version}";
-        sha256 = "02731fa0c2dcb03d8d21a1d941bdbbe99c2946c0db098eee31008e04c6283615";
+        sha256 = "cc4365a3c010a56af402e0809208873d113e9c38c401cabd88027ef4f5c01fd2";
       };
 
       beamDeps = [mime plug_crypto telemetry];
@@ -1170,12 +1170,12 @@
 
     plug_cowboy = buildMix rec {
       name = "plug_cowboy";
-      version = "2.6.1";
+      version = "2.7.0";
 
       src = fetchHex {
         pkg = "plug_cowboy";
         version = "${version}";
-        sha256 = "de36e1a21f451a18b790f37765db198075c25875c64834bcc82d90b309eb6613";
+        sha256 = "d85444fb8aa1f2fc62eabe83bbe387d81510d773886774ebdcb429b3da3c1a4a";
       };
 
       beamDeps = [cowboy cowboy_telemetry plug];
