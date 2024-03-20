@@ -1,0 +1,42 @@
+
+{
+    "enabled": 1,
+    "hidden": false,
+    "description": "jobsets",
+    "nixexprinput": "admin-fe",
+    "nixexprpath": "hydra/jobs.nix",
+    "checkinterval": 3600,
+    "schedulingshares": 100,
+    "enableemail": false,
+    "emailoverride": "",
+    "keepnr": 1,
+    "inputs": {
+        "admin-fe": {
+            "type": "git",
+            "value": "https://github.com/DarkKirb/admin-fe.git develop",
+            "emailresponsible": false
+        },
+        "nixpkgs": {
+            "type": "git",
+            "value": "https://github.com/NixOS/nixpkgs.git",
+            "emailresponsible": false
+        },
+        "prsJSON": {
+            "type": "githubpulls",
+            "value": "DarkKirb admin-fe",
+            "emailresponsible": false
+        },
+        "github_input": {
+            "type": "string",
+            "value": "admin-fe"
+        },
+        "github_repo_owner": {
+            "type": "string",
+            "value": "DarkKirb"
+        },
+        "github_repo_name": {
+            "type": "string",
+            "value": "admin-fe"
+        }
+    }
+  }
