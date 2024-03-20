@@ -117,12 +117,12 @@
 
     castore = buildMix rec {
       name = "castore";
-      version = "1.0.5";
+      version = "1.0.6";
 
       src = fetchHex {
         pkg = "castore";
         version = "${version}";
-        sha256 = "8d7c597c3e4a64c395980882d4bca3cebb8d74197c590dc272cfd3b6a6310578";
+        sha256 = "374c6e7ca752296be3d6780a6d5b922854ffcc74123da90f2f328996b962d33a";
       };
 
       beamDeps = [];
@@ -611,12 +611,12 @@
 
     finch = buildMix rec {
       name = "finch";
-      version = "0.16.0";
+      version = "0.18.0";
 
       src = fetchHex {
         pkg = "finch";
         version = "${version}";
-        sha256 = "f660174c4d519e5fec629016054d60edd822cdfe2b7270836739ac2f97735ec5";
+        sha256 = "69f5045b042e531e53edc2574f15e25e735b522c37e2ddb766e15b979e03aa65";
       };
 
       beamDeps = [castore mime mint nimble_options nimble_pool telemetry];
