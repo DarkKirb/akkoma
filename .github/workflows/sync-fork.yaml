@@ -15,7 +15,7 @@ jobs:
       - run: git remote add upstream https://akkoma.dev/AkkomaGang/akkoma.git
       - run: git fetch upstream
       - run: git reset --hard upstream/develop
-      - uses: peter-evans/create-pull-request@v5
+      - uses: peter-evans/create-pull-request@v6
         with:
           author: GitHub <noreply@github.com>
           branch: maunium-develop
