@@ -263,7 +263,6 @@ in
     meta = with lib; {
       description = "ActivityPub microblogging server";
       homepage = "https://akkoma.dev";
-      license = licenses.agpl3;
       platforms = platforms.unix;
     };
   }
