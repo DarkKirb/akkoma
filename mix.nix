@@ -1040,12 +1040,12 @@
 
     phoenix = buildMix rec {
       name = "phoenix";
-      version = "1.7.10";
+      version = "1.7.12";
 
       src = fetchHex {
         pkg = "phoenix";
         version = "${version}";
-        sha256 = "cf784932e010fd736d656d7fead6a584a4498efefe5b8227e9f383bf15bb79d0";
+        sha256 = "d646192fbade9f485b01bc9920c139bfdd19d0f8df3d73fd8eaf2dfbe0d2837c";
       };
 
       beamDeps = [castore jason phoenix_pubsub phoenix_template phoenix_view plug plug_cowboy plug_crypto telemetry websock_adapter];
@@ -1131,12 +1131,12 @@
 
     phoenix_template = buildMix rec {
       name = "phoenix_template";
-      version = "1.0.3";
+      version = "1.0.4";
 
       src = fetchHex {
         pkg = "phoenix_template";
         version = "${version}";
-        sha256 = "16f4b6588a4152f3cc057b9d0c0ba7e82ee23afa65543da535313ad8d25d8e2c";
+        sha256 = "2c0c81f0e5c6753faf5cca2f229c9709919aba34fab866d3bc05060c9c444206";
       };
 
       beamDeps = [phoenix_html];
@@ -1586,12 +1586,12 @@
 
     websock_adapter = buildMix rec {
       name = "websock_adapter";
-      version = "0.5.5";
+      version = "0.5.6";
 
       src = fetchHex {
         pkg = "websock_adapter";
         version = "${version}";
-        sha256 = "4b977ba4a01918acbf77045ff88de7f6972c2a009213c515a445c48f224ffce9";
+        sha256 = "e04378d26b0af627817ae84c92083b7e97aca3121196679b73c73b99d0d133ea";
       };
 
       beamDeps = [plug plug_cowboy websock];
