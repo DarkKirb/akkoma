@@ -117,12 +117,12 @@
 
     castore = buildMix rec {
       name = "castore";
-      version = "1.0.5";
+      version = "1.0.7";
 
       src = fetchHex {
         pkg = "castore";
         version = "${version}";
-        sha256 = "8d7c597c3e4a64c395980882d4bca3cebb8d74197c590dc272cfd3b6a6310578";
+        sha256 = "da7785a4b0d2a021cd1292a60875a784b6caef71e76bf4917bdee1f390455cf5";
       };
 
       beamDeps = [];
@@ -611,12 +611,12 @@
 
     finch = buildMix rec {
       name = "finch";
-      version = "0.16.0";
+      version = "0.18.0";
 
       src = fetchHex {
         pkg = "finch";
         version = "${version}";
-        sha256 = "f660174c4d519e5fec629016054d60edd822cdfe2b7270836739ac2f97735ec5";
+        sha256 = "69f5045b042e531e53edc2574f15e25e735b522c37e2ddb766e15b979e03aa65";
       };
 
       beamDeps = [castore mime mint nimble_options nimble_pool telemetry];
@@ -988,12 +988,12 @@
 
     nimble_pool = buildMix rec {
       name = "nimble_pool";
-      version = "1.0.0";
+      version = "1.1.0";
 
       src = fetchHex {
         pkg = "nimble_pool";
         version = "${version}";
-        sha256 = "80be3b882d2d351882256087078e1b1952a28bf98d0a287be87e4a24a710b67a";
+        sha256 = "af2e4e6b34197db81f7aad230c1118eac993acc0dae6bc83bac0126d4ae0813a";
       };
 
       beamDeps = [];
