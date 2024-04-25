@@ -5,6 +5,7 @@
     nixpkgs.url = "github:NixOS/nixpkgs";
     flake-parts.url = "github:hercules-ci/flake-parts";
     devshell.url = "github:numtide/devshell";
+    flake-compat.url = "github:edolstra/flake-compat";
   };
 
   outputs = inputs @ {flake-parts, ...}:
