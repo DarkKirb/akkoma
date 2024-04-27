@@ -351,12 +351,12 @@
 
     ecto = buildMix rec {
       name = "ecto";
-      version = "3.10.3";
+      version = "3.11.2";
 
       src = fetchHex {
         pkg = "ecto";
         version = "${version}";
-        sha256 = "44bec74e2364d491d70f7e42cd0d690922659d329f6465e89feb8a34e8cd3433";
+        sha256 = "3c38bca2c6f8d8023f2145326cc8a80100c3ffe4dcbd9842ff867f7fc6156c65";
       };
 
       beamDeps = [decimal jason telemetry];
@@ -390,12 +390,12 @@
 
     ecto_sql = buildMix rec {
       name = "ecto_sql";
-      version = "3.10.2";
+      version = "3.11.1";
 
       src = fetchHex {
         pkg = "ecto_sql";
         version = "${version}";
-        sha256 = "68c018debca57cb9235e3889affdaec7a10616a4e3a80c99fa1d01fdafaa9007";
+        sha256 = "ce14063ab3514424276e7e360108ad6c2308f6d88164a076aac8a387e1fea634";
       };
 
       beamDeps = [db_connection ecto postgrex telemetry];
