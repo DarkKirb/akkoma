@@ -123,7 +123,7 @@ defmodule Pleroma.Mixfile do
       {:phoenix_ecto, "~> 4.4"},
       {:inet_cidr, "~> 1.0.0"},
       {:ecto_enum, "~> 1.4"},
-      {:ecto_sql, "~> 3.10.0"},
+      {:ecto_sql, "~> 3.11.1"},
       {:postgrex, "~> 0.17.2"},
       {:oban, "~> 2.15.2"},
       {:gettext, "~> 0.22.3"},
