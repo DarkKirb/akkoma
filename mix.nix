@@ -1053,12 +1053,12 @@
 
     phoenix_ecto = buildMix rec {
       name = "phoenix_ecto";
-      version = "4.4.3";
+      version = "4.5.1";
 
       src = fetchHex {
         pkg = "phoenix_ecto";
         version = "${version}";
-        sha256 = "d36c401206f3011fefd63d04e8ef626ec8791975d9d107f9a0817d426f61ac07";
+        sha256 = "ebe43aa580db129e54408e719fb9659b7f9e0d52b965c5be26cdca416ecead28";
       };
 
       beamDeps = [ecto phoenix_html plug];
