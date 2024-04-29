@@ -767,12 +767,12 @@
 
     joken = buildMix rec {
       name = "joken";
-      version = "2.6.0";
+      version = "2.6.1";
 
       src = fetchHex {
         pkg = "joken";
         version = "${version}";
-        sha256 = "5a95b05a71cd0b54abd35378aeb1d487a23a52c324fa7efdffc512b655b5aaa7";
+        sha256 = "ab26122c400b3d254ce7d86ed066d6afad27e70416df947cdcb01e13a7382e68";
       };
 
       beamDeps = [jose];
@@ -780,12 +780,12 @@
 
     jose = buildMix rec {
       name = "jose";
-      version = "1.11.6";
+      version = "1.11.10";
 
       src = fetchHex {
         pkg = "jose";
         version = "${version}";
-        sha256 = "6275cb75504f9c1e60eeacb771adfeee4905a9e182103aa59b53fed651ff9738";
+        sha256 = "0d6cd36ff8ba174db29148fc112b5842186b68a90ce9fc2b3ec3afe76593e614";
       };
 
       beamDeps = [];
