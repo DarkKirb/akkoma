@@ -637,12 +637,12 @@
 
     floki = buildMix rec {
       name = "floki";
-      version = "0.35.2";
+      version = "0.36.2";
 
       src = fetchHex {
         pkg = "floki";
         version = "${version}";
-        sha256 = "6b05289a8e9eac475f644f09c2e4ba7e19201fd002b89c28c1293e7bd16773d9";
+        sha256 = "a8766c0bc92f074e5cb36c4f9961982eda84c5d2b8e979ca67f5c268ec8ed580";
       };
 
       beamDeps = [];
