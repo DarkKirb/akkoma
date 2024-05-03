@@ -52,12 +52,12 @@
 
     bcrypt_elixir = buildMix rec {
       name = "bcrypt_elixir";
-      version = "3.0.1";
+      version = "3.1.0";
 
       src = fetchHex {
         pkg = "bcrypt_elixir";
         version = "${version}";
-        sha256 = "486bb95efb645d1efc6794c1ddd776a186a9a713abf06f45708a6ce324fb96cf";
+        sha256 = "2ad2acb5a8bc049e8d5aa267802631912bb80d5f4110a178ae7999e69dca1bf7";
       };
 
       beamDeps = [comeonin elixir_make];
@@ -403,15 +403,15 @@
 
     elixir_make = buildMix rec {
       name = "elixir_make";
-      version = "0.7.7";
+      version = "0.8.3";
 
       src = fetchHex {
         pkg = "elixir_make";
         version = "${version}";
-        sha256 = "5bc19fff950fad52bbe5f211b12db9ec82c6b34a9647da0c2224b8b8464c7e6c";
+        sha256 = "5c99a18571a756d4af7a4d89ca75c28ac899e6103af6f223982f09ce44942cc9";
       };
 
-      beamDeps = [castore];
+      beamDeps = [castore certifi];
     };
 
     elixir_xml_to_map = buildMix rec {
