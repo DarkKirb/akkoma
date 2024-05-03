@@ -1443,12 +1443,12 @@
 
     telemetry_poller = buildRebar3 rec {
       name = "telemetry_poller";
-      version = "1.0.0";
+      version = "1.1.0";
 
       src = fetchHex {
         pkg = "telemetry_poller";
         version = "${version}";
-        sha256 = "b3a24eafd66c3f42da30fc3ca7dda1e9d546c12250a2d60d7b81d264fbec4f6e";
+        sha256 = "9eb9d9cbfd81cbd7cdd24682f8711b6e2b691289a0de6826e58452f28c103c8f";
       };
 
       beamDeps = [telemetry];
