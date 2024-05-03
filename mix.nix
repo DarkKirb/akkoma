@@ -559,12 +559,12 @@
 
     expo = buildMix rec {
       name = "expo";
-      version = "0.4.1";
+      version = "0.5.2";
 
       src = fetchHex {
         pkg = "expo";
         version = "${version}";
-        sha256 = "2ff7ba7a798c8c543c12550fa0e2cbc81b95d4974c65855d8d15ba7b37a1ce47";
+        sha256 = "8c9bfa06ca017c9cb4020fabe980bc7fdb1aaec059fd004c2ab3bff03b1c599c";
       };
 
       beamDeps = [];
@@ -663,12 +663,12 @@
 
     gettext = buildMix rec {
       name = "gettext";
-      version = "0.22.3";
+      version = "0.24.0";
 
       src = fetchHex {
         pkg = "gettext";
         version = "${version}";
-        sha256 = "935f23447713954a6866f1bb28c3a878c4c011e802bcd68a726f5e558e4b64bd";
+        sha256 = "bdf75cdfcbe9e4622dd18e034b227d77dd17f0f133853a1c73b97b3d6c770e8b";
       };
 
       beamDeps = [expo];
