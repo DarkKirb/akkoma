@@ -897,12 +897,12 @@
 
     mimerl = buildRebar3 rec {
       name = "mimerl";
-      version = "1.2.0";
+      version = "1.3.0";
 
       src = fetchHex {
         pkg = "mimerl";
         version = "${version}";
-        sha256 = "f278585650aa581986264638ebf698f8bb19df297f66ad91b18910dfc6e19323";
+        sha256 = "a1e15a50d1887217de95f0b9b0793e32853f7c258a5cd227650889b38839fe9d";
       };
 
       beamDeps = [];
@@ -1183,12 +1183,12 @@
 
     plug_crypto = buildMix rec {
       name = "plug_crypto";
-      version = "2.0.0";
+      version = "2.1.0";
 
       src = fetchHex {
         pkg = "plug_crypto";
         version = "${version}";
-        sha256 = "53695bae57cc4e54566d993eb01074e4d894b65a3766f1c43e2c61a1b0f45ea9";
+        sha256 = "131216a4b030b8f8ce0f26038bc4421ae60e4bb95c5cf5395e1421437824c4fa";
       };
 
       beamDeps = [];
@@ -1352,12 +1352,12 @@
 
     swoosh = buildMix rec {
       name = "swoosh";
-      version = "1.16.4";
+      version = "1.16.5";
 
       src = fetchHex {
         pkg = "swoosh";
         version = "${version}";
-        sha256 = "a38798368c09b09d7108803c42f24bb051d3e87bc1b81e6f09b20bf5a31c6676";
+        sha256 = "b2324cf696b09ee52e5e1049dcc77880a11fe618a381e2df1c5ca5d69c380eb0";
       };
 
       beamDeps = [cowboy ex_aws finch gen_smtp hackney jason mail mime plug plug_cowboy telemetry];
