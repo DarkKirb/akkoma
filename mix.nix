@@ -299,12 +299,12 @@
 
     dialyxir = buildMix rec {
       name = "dialyxir";
-      version = "1.4.2";
+      version = "1.4.3";
 
       src = fetchHex {
         pkg = "dialyxir";
         version = "${version}";
-        sha256 = "516603d8067b2fd585319e4b13d3674ad4f314a5902ba8130cd97dc902ce6bbd";
+        sha256 = "bf2cfb75cd5c5006bec30141b131663299c661a864ec7fbbc72dfa557487a986";
       };
 
       beamDeps = [erlex];
@@ -1079,12 +1079,12 @@
 
     phoenix_live_dashboard = buildMix rec {
       name = "phoenix_live_dashboard";
-      version = "0.7.2";
+      version = "0.8.3";
 
       src = fetchHex {
         pkg = "phoenix_live_dashboard";
         version = "${version}";
-        sha256 = "0e5fdf063c7a3b620c566a30fcf68b7ee02e5e46fe48ee46a6ec3ba382dc05b7";
+        sha256 = "f9470a0a8bae4f56430a23d42f977b5a6205fdba6559d76f932b876bfaec652d";
       };
 
       beamDeps = [ecto ecto_psql_extras mime phoenix_live_view telemetry_metrics];
@@ -1092,15 +1092,15 @@
 
     phoenix_live_view = buildMix rec {
       name = "phoenix_live_view";
-      version = "0.18.18";
+      version = "0.20.14";
 
       src = fetchHex {
         pkg = "phoenix_live_view";
         version = "${version}";
-        sha256 = "a5810d0472f3189ede6d2a95bda7f31c6113156b91784a3426cb0ab6a6d85214";
+        sha256 = "82f6d006c5264f979ed5eb75593d808bbe39020f20df2e78426f4f2d570e2402";
       };
 
-      beamDeps = [jason phoenix phoenix_html phoenix_template phoenix_view telemetry];
+      beamDeps = [floki jason phoenix phoenix_html phoenix_template phoenix_view plug telemetry];
     };
 
     phoenix_pubsub = buildMix rec {
@@ -1404,12 +1404,12 @@
 
     telemetry_metrics = buildMix rec {
       name = "telemetry_metrics";
-      version = "0.6.1";
+      version = "0.6.2";
 
       src = fetchHex {
         pkg = "telemetry_metrics";
         version = "${version}";
-        sha256 = "7be9e0871c41732c233be71e4be11b96e56177bf15dde64a8ac9ce72ac9834c6";
+        sha256 = "9b43db0dc33863930b9ef9d27137e78974756f5f198cae18409970ed6fa5b561";
       };
 
       beamDeps = [telemetry];
