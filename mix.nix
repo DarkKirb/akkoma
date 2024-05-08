@@ -689,12 +689,12 @@
 
     hpax = buildMix rec {
       name = "hpax";
-      version = "0.1.2";
+      version = "0.2.0";
 
       src = fetchHex {
         pkg = "hpax";
         version = "${version}";
-        sha256 = "2c87843d5a23f5f16748ebe77969880e29809580efdaccd615cd3bed628a8c13";
+        sha256 = "bea06558cdae85bed075e6c036993d43cd54d447f76d8190a8db0dc5893fa2f1";
       };
 
       beamDeps = [];
@@ -910,12 +910,12 @@
 
     mint = buildMix rec {
       name = "mint";
-      version = "1.5.2";
+      version = "1.6.0";
 
       src = fetchHex {
         pkg = "mint";
         version = "${version}";
-        sha256 = "d77d9e9ce4eb35941907f1d3df38d8f750c357865353e21d335bdcdf6d892a02";
+        sha256 = "3c5ae85d90a5aca0a49c0d8b67360bbe407f3b54f1030a111047ff988e8fefaa";
       };
 
       beamDeps = [castore hpax];
