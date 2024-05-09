@@ -1118,12 +1118,12 @@
 
     phoenix_swoosh = buildMix rec {
       name = "phoenix_swoosh";
-      version = "1.2.0";
+      version = "1.2.1";
 
       src = fetchHex {
         pkg = "phoenix_swoosh";
         version = "${version}";
-        sha256 = "e88d117251e89a16b92222415a6d87b99a96747ddf674fc5c7631de734811dba";
+        sha256 = "4000eeba3f9d7d1a6bf56d2bd56733d5cadf41a7f0d8ffe5bb67e7d667e204a2";
       };
 
       beamDeps = [finch hackney phoenix phoenix_html phoenix_view swoosh];
