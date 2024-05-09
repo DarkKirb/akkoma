@@ -13,12 +13,12 @@
   with self; {
     argon2_elixir = buildMix rec {
       name = "argon2_elixir";
-      version = "3.2.1";
+      version = "4.0.0";
 
       src = fetchHex {
         pkg = "argon2_elixir";
         version = "${version}";
-        sha256 = "a813b78217394530b5fcf4c8070feee43df03ffef938d044019169c766315690";
+        sha256 = "f9da27cf060c9ea61b1bd47837a28d7e48a8f6fa13a745e252556c14f9132c7f";
       };
 
       beamDeps = [comeonin elixir_make];
@@ -403,15 +403,15 @@
 
     elixir_make = buildMix rec {
       name = "elixir_make";
-      version = "0.7.7";
+      version = "0.8.3";
 
       src = fetchHex {
         pkg = "elixir_make";
         version = "${version}";
-        sha256 = "5bc19fff950fad52bbe5f211b12db9ec82c6b34a9647da0c2224b8b8464c7e6c";
+        sha256 = "5c99a18571a756d4af7a4d89ca75c28ac899e6103af6f223982f09ce44942cc9";
       };
 
-      beamDeps = [castore];
+      beamDeps = [castore certifi];
     };
 
     elixir_xml_to_map = buildMix rec {
@@ -546,15 +546,15 @@
 
     excoveralls = buildMix rec {
       name = "excoveralls";
-      version = "0.16.1";
+      version = "0.18.1";
 
       src = fetchHex {
         pkg = "excoveralls";
         version = "${version}";
-        sha256 = "dae763468e2008cf7075a64cb1249c97cb4bc71e236c5c2b5e5cdf1cfa2bf138";
+        sha256 = "d65f79db146bb20399f23046015974de0079668b9abb2f5aac074d078da60b8d";
       };
 
-      beamDeps = [hackney jason];
+      beamDeps = [castore jason];
     };
 
     expo = buildMix rec {
@@ -1014,12 +1014,12 @@
 
     open_api_spex = buildMix rec {
       name = "open_api_spex";
-      version = "3.18.3";
+      version = "3.19.0";
 
       src = fetchHex {
         pkg = "open_api_spex";
         version = "${version}";
-        sha256 = "c0cfc31570199ce7e7520b494a591027da609af45f6bf9adce51e2469b1609fb";
+        sha256 = "7e06db4a6a20fb765677aabad84494b950765f0d734444ded79f790638ff4ded";
       };
 
       beamDeps = [jason plug poison];
@@ -1430,12 +1430,12 @@
 
     telemetry_metrics_prometheus_core = buildMix rec {
       name = "telemetry_metrics_prometheus_core";
-      version = "1.1.0";
+      version = "1.2.1";
 
       src = fetchHex {
         pkg = "telemetry_metrics_prometheus_core";
         version = "${version}";
-        sha256 = "0dd10e7fe8070095df063798f82709b0a1224c31b8baf6278b423898d591a069";
+        sha256 = "5e2c599da4983c4f88a33e9571f1458bf98b0cf6ba930f1dc3a6e8cf45d5afb6";
       };
 
       beamDeps = [telemetry telemetry_metrics];
