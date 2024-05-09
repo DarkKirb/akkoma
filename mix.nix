@@ -1430,12 +1430,12 @@
 
     telemetry_metrics_prometheus_core = buildMix rec {
       name = "telemetry_metrics_prometheus_core";
-      version = "1.1.0";
+      version = "1.2.1";
 
       src = fetchHex {
         pkg = "telemetry_metrics_prometheus_core";
         version = "${version}";
-        sha256 = "0dd10e7fe8070095df063798f82709b0a1224c31b8baf6278b423898d591a069";
+        sha256 = "5e2c599da4983c4f88a33e9571f1458bf98b0cf6ba930f1dc3a6e8cf45d5afb6";
       };
 
       beamDeps = [telemetry telemetry_metrics];
