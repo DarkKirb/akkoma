@@ -494,12 +494,12 @@
 
     ex_const = buildMix rec {
       name = "ex_const";
-      version = "0.2.4";
+      version = "0.3.0";
 
       src = fetchHex {
         pkg = "ex_const";
         version = "${version}";
-        sha256 = "96fd346610cc992b8f896ed26a98be82ac4efb065a0578f334a32d60a3ba9767";
+        sha256 = "76546322abb9e40ee4a2f454cf1c8a5b25c3672fa79bed1ea52c31e0d2428ca9";
       };
 
       beamDeps = [];
