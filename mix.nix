@@ -1066,15 +1066,15 @@
 
     phoenix_html = buildMix rec {
       name = "phoenix_html";
-      version = "3.3.3";
+      version = "4.1.1";
 
       src = fetchHex {
         pkg = "phoenix_html";
         version = "${version}";
-        sha256 = "923ebe6fec6e2e3b3e569dfbdc6560de932cd54b000ada0208b5f45024bdd76c";
+        sha256 = "f2f2df5a72bc9a2f510b21497fd7d2b86d932ec0598f0210fed4114adc546c6f";
       };
 
-      beamDeps = [plug];
+      beamDeps = [];
     };
 
     phoenix_live_dashboard = buildMix rec {
