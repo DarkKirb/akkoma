@@ -163,7 +163,7 @@ defmodule Pleroma.Mixfile do
        ref: "6640ce7d24c783ac2ef56e27d00d12e8dc85f396"},
       {:telemetry, "~> 1.2"},
       {:telemetry_poller, "~> 1.0"},
-      {:telemetry_metrics, "~> 0.6"},
+      {:telemetry_metrics, "~> 1.0"},
       {:telemetry_metrics_prometheus_core, "~> 1.2.1"},
       {:poolboy, "~> 1.5"},
       {:recon, "~> 2.5"},
