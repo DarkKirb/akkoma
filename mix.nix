@@ -1508,12 +1508,12 @@
 
     ueberauth = buildMix rec {
       name = "ueberauth";
-      version = "0.10.5";
+      version = "0.10.8";
 
       src = fetchHex {
         pkg = "ueberauth";
         version = "${version}";
-        sha256 = "3efd1f31d490a125c7ed453b926f7c31d78b97b8a854c755f5c40064bf3ac9e1";
+        sha256 = "f2d3172e52821375bccb8460e5fa5cb91cfd60b19b636b6e57e9759b6f8c10c1";
       };
 
       beamDeps = [plug];
