@@ -130,7 +130,7 @@ defmodule Pleroma.Mixfile do
       {:bcrypt_elixir, "~> 3.0.1"},
       {:fast_sanitize, "~> 0.2.3"},
       {:html_entities, "~> 0.5"},
-      {:phoenix_html, "~> 3.3"},
+      {:phoenix_html, "~> 4.1"},
       {:calendar, "~> 1.0"},
       {:cachex, "~> 3.6"},
       {:tesla, "~> 1.7"},
