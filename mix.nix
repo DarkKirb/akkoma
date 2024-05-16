@@ -1053,15 +1053,15 @@
 
     phoenix_ecto = buildMix rec {
       name = "phoenix_ecto";
-      version = "4.5.1";
+      version = "4.6.0";
 
       src = fetchHex {
         pkg = "phoenix_ecto";
         version = "${version}";
-        sha256 = "ebe43aa580db129e54408e719fb9659b7f9e0d52b965c5be26cdca416ecead28";
+        sha256 = "32a72c466c8d7ed69e38558058fead3d4a5bbcf1225c0aa4430e0d2ffdfc2f84";
       };
 
-      beamDeps = [ecto phoenix_html plug];
+      beamDeps = [ecto phoenix_html plug postgrex];
     };
 
     phoenix_html = buildMix rec {
