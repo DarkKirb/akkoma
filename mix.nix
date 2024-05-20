@@ -1014,12 +1014,12 @@
 
     open_api_spex = buildMix rec {
       name = "open_api_spex";
-      version = "3.19.0";
+      version = "3.19.1";
 
       src = fetchHex {
         pkg = "open_api_spex";
         version = "${version}";
-        sha256 = "7e06db4a6a20fb765677aabad84494b950765f0d734444ded79f790638ff4ded";
+        sha256 = "392895827ce2984a3459c91a484e70708132d8c2c6c5363972b4b91d6bbac3dd";
       };
 
       beamDeps = [jason plug poison];
@@ -1157,12 +1157,12 @@
 
     plug = buildMix rec {
       name = "plug";
-      version = "1.15.3";
+      version = "1.16.0";
 
       src = fetchHex {
         pkg = "plug";
         version = "${version}";
-        sha256 = "cc4365a3c010a56af402e0809208873d113e9c38c401cabd88027ef4f5c01fd2";
+        sha256 = "cbf53aa1f5c4d758a7559c0bd6d59e286c2be0c6a1fac8cc3eee2f638243b93e";
       };
 
       beamDeps = [mime plug_crypto telemetry];
