@@ -377,12 +377,12 @@
 
     ecto_psql_extras = buildMix rec {
       name = "ecto_psql_extras";
-      version = "0.7.15";
+      version = "0.8.0";
 
       src = fetchHex {
         pkg = "ecto_psql_extras";
         version = "${version}";
-        sha256 = "b6127f3a5c6fc3d84895e4768cc7c199f22b48b67d6c99b13fbf4a374e73f039";
+        sha256 = "f1512812dc196bcb932a96c82e55f69b543dc125e9d39f5e3631a9c4ec65ef12";
       };
 
       beamDeps = [ecto_sql postgrex table_rex];
