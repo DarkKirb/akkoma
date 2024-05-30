@@ -962,12 +962,12 @@
 
     nimble_options = buildMix rec {
       name = "nimble_options";
-      version = "1.1.0";
+      version = "1.1.1";
 
       src = fetchHex {
         pkg = "nimble_options";
         version = "${version}";
-        sha256 = "8bbbb3941af3ca9acc7835f5655ea062111c9c27bcac53e004460dfd19008a99";
+        sha256 = "821b2470ca9442c4b6984882fe9bb0389371b8ddec4d45a9504f00a66f650b44";
       };
 
       beamDeps = [];
@@ -1352,12 +1352,12 @@
 
     swoosh = buildMix rec {
       name = "swoosh";
-      version = "1.16.7";
+      version = "1.16.8";
 
       src = fetchHex {
         pkg = "swoosh";
         version = "${version}";
-        sha256 = "21073982816cff3410e90c0d80ebfd5a0bf4839c7b39db20bc69a6df123bbf35";
+        sha256 = "33de50fa414c07ed55fcb28e60e72a44496e14f8753e46cbf80e7b15d1adaae2";
       };
 
       beamDeps = [cowboy ex_aws finch gen_smtp hackney jason mail mime plug plug_cowboy telemetry];
