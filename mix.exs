@@ -124,7 +124,7 @@ defmodule Pleroma.Mixfile do
       {:inet_cidr, "~> 1.0.0"},
       {:ecto_enum, "~> 1.4"},
       {:ecto_sql, "~> 3.11.1"},
-      {:postgrex, "~> 0.17.2"},
+      {:postgrex, "~> 0.18.0"},
       {:oban, "~> 2.17.10"},
       {:gettext, "~> 0.24.0"},
       {:bcrypt_elixir, "~> 3.0.1"},
