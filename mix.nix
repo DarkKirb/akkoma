@@ -468,12 +468,12 @@
 
     ex_aws = buildMix rec {
       name = "ex_aws";
-      version = "2.5.3";
+      version = "2.5.4";
 
       src = fetchHex {
         pkg = "ex_aws";
         version = "${version}";
-        sha256 = "67115f1d399d7ec4d191812ee565c6106cb4b1bbf19a9d4db06f265fd87da97e";
+        sha256 = "e82bd0091bb9a5bb190139599f922ff3fc7aebcca4374d65c99c4e23aa6d1625";
       };
 
       beamDeps = [hackney jason mime sweet_xml telemetry];
