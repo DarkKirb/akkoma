@@ -910,12 +910,12 @@
 
     mint = buildMix rec {
       name = "mint";
-      version = "1.6.0";
+      version = "1.6.1";
 
       src = fetchHex {
         pkg = "mint";
         version = "${version}";
-        sha256 = "3c5ae85d90a5aca0a49c0d8b67360bbe407f3b54f1030a111047ff988e8fefaa";
+        sha256 = "4fc518dcc191d02f433393a72a7ba3f6f94b101d094cb6bf532ea54c89423780";
       };
 
       beamDeps = [castore hpax];
