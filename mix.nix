@@ -234,12 +234,12 @@
 
     credo = buildMix rec {
       name = "credo";
-      version = "1.7.6";
+      version = "1.7.7";
 
       src = fetchHex {
         pkg = "credo";
         version = "${version}";
-        sha256 = "146f347fb9f8cbc5f7e39e3f22f70acbef51d441baa6d10169dd604bfbc55296";
+        sha256 = "8bc87496c9aaacdc3f90f01b7b0582467b69b4bd2441fe8aae3109d843cc2f2e";
       };
 
       beamDeps = [bunt file_system jason];
