@@ -1456,12 +1456,12 @@
 
     tesla = buildMix rec {
       name = "tesla";
-      version = "1.9.0";
+      version = "1.10.0";
 
       src = fetchHex {
         pkg = "tesla";
         version = "${version}";
-        sha256 = "7c240c67e855f7e63e795bf16d6b3f5115a81d1f44b7fe4eadbf656bae0fef8a";
+        sha256 = "eb1cab91a367667ba7391d3d2c7c46c0ac016a80718b32fb179b54880962e0a8";
       };
 
       beamDeps = [castore finch hackney jason mime mint poison telemetry];
