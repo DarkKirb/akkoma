@@ -520,12 +520,12 @@
 
     ex_machina = buildMix rec {
       name = "ex_machina";
-      version = "2.7.0";
+      version = "2.8.0";
 
       src = fetchHex {
         pkg = "ex_machina";
         version = "${version}";
-        sha256 = "419aa7a39bde11894c87a615c4ecaa52d8f107bbdd81d810465186f783245bf8";
+        sha256 = "79fe1a9c64c0c1c1fab6c4fa5d871682cb90de5885320c187d117004627a7729";
       };
 
       beamDeps = [ecto ecto_sql];
