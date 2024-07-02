@@ -754,12 +754,12 @@
 
     jason = buildMix rec {
       name = "jason";
-      version = "1.4.1";
+      version = "1.4.3";
 
       src = fetchHex {
         pkg = "jason";
         version = "${version}";
-        sha256 = "fbb01ecdfd565b56261302f7e1fcc27c4fb8f32d56eab74db621fc154604a7a1";
+        sha256 = "9a90e868927f7c777689baa16d86f4d0e086d968db5c05d917ccff6d443e58a3";
       };
 
       beamDeps = [decimal];
@@ -1053,12 +1053,12 @@
 
     phoenix_ecto = buildMix rec {
       name = "phoenix_ecto";
-      version = "4.6.1";
+      version = "4.6.2";
 
       src = fetchHex {
         pkg = "phoenix_ecto";
         version = "${version}";
-        sha256 = "0ae544ff99f3c482b0807c5cec2c8289e810ecacabc04959d82c3337f4703391";
+        sha256 = "3f94d025f59de86be00f5f8c5dd7b5965a3298458d21ab1c328488be3b5fcd59";
       };
 
       beamDeps = [ecto phoenix_html plug postgrex];
