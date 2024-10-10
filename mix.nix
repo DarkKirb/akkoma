@@ -754,12 +754,12 @@
 
     jason = buildMix rec {
       name = "jason";
-      version = "1.4.1";
+      version = "1.4.4";
 
       src = fetchHex {
         pkg = "jason";
         version = "${version}";
-        sha256 = "fbb01ecdfd565b56261302f7e1fcc27c4fb8f32d56eab74db621fc154604a7a1";
+        sha256 = "c5eb0cab91f094599f94d55bc63409236a8ec69a21a67814529e8d5f6cc90b3b";
       };
 
       beamDeps = [decimal];
