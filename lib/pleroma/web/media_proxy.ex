@@ -145,7 +145,7 @@ defmodule Pleroma.Web.MediaProxy do
   end
 
   def base_url do
-    Config.get([:media_proxy, :base_url], Endpoint.url())
+    Config.get!([:media_proxy, :base_url])
   end
 
   defp proxy_url(path, sig_base64, url_base64, filename) do

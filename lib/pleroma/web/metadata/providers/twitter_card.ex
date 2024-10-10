@@ -16,13 +16,20 @@ defmodule Pleroma.Web.Metadata.Providers.TwitterCard do
   @media_types ["image", "audio", "video"]
 
   @impl Provider
-  def build_tags(%{
-        object: object,
-        url: url,
-        user: user
-      }) do
-    attachments = build_attachments(object)
-    scrubbed_content = Utils.scrub_html_and_truncate(object)
+  def build_tags(%{activity_id: id, object: object, user: user}) do
+    attachments =
+      if Utils.visible?(object) do
+        build_attachments(id, object)
+      else
+        []
+      end
+
+    scrubbed_content =
+      if Utils.visible?(object) do
+        Utils.scrub_html_and_truncate(object)
+      else
+        "Content cannot be displayed."
+      end
 
     [
       {:meta,
@@ -57,25 +64,33 @@ defmodule Pleroma.Web.Metadata.Providers.TwitterCard do
 
   @impl Provider
   def build_tags(%{user: user}) do
-    with truncated_bio = Utils.scrub_html_and_truncate(user.bio) do
-      [
-        {:meta,
-         [
-           property: "twitter:title",
-           content: Utils.user_name_string(user)
-         ], []},
-        {:meta, [property: "twitter:url", content: user.uri || user.ap_id], []},
-        {:meta, [property: "twitter:description", content: truncated_bio], []},
-        {:meta, [property: "twitter:type", content: "article"], []},
-        {:meta, [property: "twitter:image", content: MediaProxy.preview_url(User.avatar_url(user))],
-         []},
-        {:meta, [property: "twitter:image:width", content: 150], []},
-        {:meta, [property: "twitter:image:height", content: 150], []}
-      ]
+    if Utils.visible?(user) do
+      with truncated_bio = Utils.scrub_html_and_truncate(user.bio) do
+        [
+          title_tag(user),
+          {:meta, [name: "twitter:description", content: truncated_bio], []},
+          image_tag(user),
+          {:meta, [name: "twitter:card", content: "summary"], []}
+        ]
+      end
+    else
+      []
     end
   end
 
-  defp build_attachments(%{data: %{"attachment" => attachments}}) do
+  defp title_tag(user) do
+    {:meta, [name: "twitter:title", content: Utils.user_name_string(user)], []}
+  end
+
+  def image_tag(user) do
+    if Utils.visible?(user) do
+      {:meta, [name: "twitter:image", content: MediaProxy.preview_url(User.avatar_url(user))], []}
+    else
+      {:meta, [name: "twitter:image", content: ""], []}
+    end
+  end
+
+  defp build_attachments(id, %{data: %{"attachment" => attachments}}) do
     Enum.reduce(attachments, [], fn attachment, acc ->
       rendered_tags =
         Enum.reduce(attachment["url"], [], fn url, acc ->

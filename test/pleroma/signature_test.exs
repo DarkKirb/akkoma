@@ -110,7 +110,7 @@ defmodule Pleroma.SignatureTest do
 
       headers = %{
         host: "test.test",
-        "content-length": 100
+        "content-length": "100"
       }
 
       assert_signature_equal(
@@ -127,7 +127,7 @@ defmodule Pleroma.SignatureTest do
 
       assert Signature.sign(
                user,
-               %{host: "test.test", "content-length": 100}
+               %{host: "test.test", "content-length": "100"}
              ) == {:error, []}
     end
   end
@@ -151,6 +151,11 @@ defmodule Pleroma.SignatureTest do
     test "it deduces the actor ID for streams" do
       assert Signature.key_id_to_actor_id("https://example.com/users/1234?operation=getkey") ==
                {:ok, "https://example.com/users/1234"}
+    end
+
+    test "it deduces the actor ID for bridgy" do
+      assert Signature.key_id_to_actor_id("https://example.com/1234#key") ==
+               {:ok, "https://example.com/1234"}
     end
 
     test "it calls webfinger for 'acct:' accounts" do

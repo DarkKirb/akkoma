@@ -326,9 +326,9 @@ defmodule Pleroma.UserTest do
         insert(:user, %{
           local: false,
           nickname: "fuser2",
-          ap_id: "http://localhost:4001/users/fuser2",
-          follower_address: "http://localhost:4001/users/fuser2/followers",
-          following_address: "http://localhost:4001/users/fuser2/following"
+          ap_id: "http://remote.org/users/fuser2",
+          follower_address: "http://remote.org/users/fuser2/followers",
+          following_address: "http://remote.org/users/fuser2/following"
         })
 
       {:ok, user, followed} = User.follow(user, followed, :follow_accept)
@@ -765,109 +765,19 @@ defmodule Pleroma.UserTest do
     setup do: clear_config([Pleroma.Web.WebFinger, :update_nickname_on_user_fetch], true)
 
     test "for mastodon" do
-      Tesla.Mock.mock(fn
-        %{url: "https://example.com/.well-known/host-meta"} ->
-          %Tesla.Env{
-            status: 302,
-            headers: [{"location", "https://sub.example.com/.well-known/host-meta"}]
-          }
-
-        %{url: "https://sub.example.com/.well-known/host-meta"} ->
-          %Tesla.Env{
-            status: 200,
-            body:
-              "test/fixtures/webfinger/masto-host-meta.xml"
-              |> File.read!()
-              |> String.replace("{{domain}}", "sub.example.com")
-          }
-
-        %{url: "https://sub.example.com/.well-known/webfinger?resource=acct:a@example.com"} ->
-          %Tesla.Env{
-            status: 200,
-            body:
-              "test/fixtures/webfinger/masto-webfinger.json"
-              |> File.read!()
-              |> String.replace("{{nickname}}", "a")
-              |> String.replace("{{domain}}", "example.com")
-              |> String.replace("{{subdomain}}", "sub.example.com"),
-            headers: [{"content-type", "application/jrd+json"}]
-          }
-
-        %{url: "https://sub.example.com/users/a"} ->
-          %Tesla.Env{
-            status: 200,
-            body:
-              "test/fixtures/webfinger/masto-user.json"
-              |> File.read!()
-              |> String.replace("{{nickname}}", "a")
-              |> String.replace("{{domain}}", "sub.example.com"),
-            headers: [{"content-type", "application/activity+json"}]
-          }
-
-        %{url: "https://sub.example.com/users/a/collections/featured"} ->
-          %Tesla.Env{
-            status: 200,
-            body:
-              File.read!("test/fixtures/users_mock/masto_featured.json")
-              |> String.replace("{{domain}}", "sub.example.com")
-              |> String.replace("{{nickname}}", "a"),
-            headers: [{"content-type", "application/activity+json"}]
-          }
-      end)
-
-      ap_id = "a@example.com"
+      ap_id = "a@mastodon.example"
       {:ok, fetched_user} = User.get_or_fetch(ap_id)
 
-      assert fetched_user.ap_id == "https://sub.example.com/users/a"
-      assert fetched_user.nickname == "a@example.com"
+      assert fetched_user.ap_id == "https://sub.mastodon.example/users/a"
+      assert fetched_user.nickname == "a@mastodon.example"
     end
 
     test "for pleroma" do
-      Tesla.Mock.mock(fn
-        %{url: "https://example.com/.well-known/host-meta"} ->
-          %Tesla.Env{
-            status: 302,
-            headers: [{"location", "https://sub.example.com/.well-known/host-meta"}]
-          }
-
-        %{url: "https://sub.example.com/.well-known/host-meta"} ->
-          %Tesla.Env{
-            status: 200,
-            body:
-              "test/fixtures/webfinger/pleroma-host-meta.xml"
-              |> File.read!()
-              |> String.replace("{{domain}}", "sub.example.com")
-          }
-
-        %{url: "https://sub.example.com/.well-known/webfinger?resource=acct:a@example.com"} ->
-          %Tesla.Env{
-            status: 200,
-            body:
-              "test/fixtures/webfinger/pleroma-webfinger.json"
-              |> File.read!()
-              |> String.replace("{{nickname}}", "a")
-              |> String.replace("{{domain}}", "example.com")
-              |> String.replace("{{subdomain}}", "sub.example.com"),
-            headers: [{"content-type", "application/jrd+json"}]
-          }
-
-        %{url: "https://sub.example.com/users/a"} ->
-          %Tesla.Env{
-            status: 200,
-            body:
-              "test/fixtures/webfinger/pleroma-user.json"
-              |> File.read!()
-              |> String.replace("{{nickname}}", "a")
-              |> String.replace("{{domain}}", "sub.example.com"),
-            headers: [{"content-type", "application/activity+json"}]
-          }
-      end)
-
-      ap_id = "a@example.com"
+      ap_id = "a@pleroma.example"
       {:ok, fetched_user} = User.get_or_fetch(ap_id)
 
-      assert fetched_user.ap_id == "https://sub.example.com/users/a"
-      assert fetched_user.nickname == "a@example.com"
+      assert fetched_user.ap_id == "https://sub.pleroma.example/users/a"
+      assert fetched_user.nickname == "a@pleroma.example"
     end
   end
 
@@ -1239,6 +1149,18 @@ defmodule Pleroma.UserTest do
       assert User.blocks?(user, blocked_user)
     end
 
+    test "it blocks domains" do
+      user = insert(:user)
+      blocked_user = insert(:user)
+
+      refute User.blocks_domain?(user, blocked_user)
+
+      url = URI.parse(blocked_user.ap_id)
+      {:ok, user} = User.block_domain(user, url.host)
+
+      assert User.blocks_domain?(user, blocked_user)
+    end
+
     test "it unblocks users" do
       user = insert(:user)
       blocked_user = insert(:user)
@@ -1247,6 +1169,17 @@ defmodule Pleroma.UserTest do
       {:ok, _user_block} = User.unblock(user, blocked_user)
 
       refute User.blocks?(user, blocked_user)
+    end
+
+    test "it unblocks domains" do
+      user = insert(:user)
+      blocked_user = insert(:user)
+
+      url = URI.parse(blocked_user.ap_id)
+      {:ok, user} = User.block_domain(user, url.host)
+      {:ok, user} = User.unblock_domain(user, url.host)
+
+      refute User.blocks_domain?(user, blocked_user)
     end
 
     test "blocks tear down cyclical follow relationships" do
@@ -2177,8 +2110,8 @@ defmodule Pleroma.UserTest do
 
   describe "sync followers count" do
     setup do
-      user1 = insert(:user, local: false, ap_id: "http://localhost:4001/users/masto_closed")
-      user2 = insert(:user, local: false, ap_id: "http://localhost:4001/users/fuser2")
+      user1 = insert(:user, local: false, ap_id: "http://remote.org/users/masto_closed")
+      user2 = insert(:user, local: false, ap_id: "http://remote.org/users/fuser2")
       insert(:user, local: true)
       insert(:user, local: false, is_active: false)
       {:ok, user1: user1, user2: user2}
@@ -2272,8 +2205,8 @@ defmodule Pleroma.UserTest do
       other_user =
         insert(:user,
           local: false,
-          follower_address: "http://localhost:4001/users/masto_closed/followers",
-          following_address: "http://localhost:4001/users/masto_closed/following",
+          follower_address: "http://remote.org/users/masto_closed/followers",
+          following_address: "http://remote.org/users/masto_closed/following",
           ap_enabled: true
         )
 
@@ -2294,8 +2227,8 @@ defmodule Pleroma.UserTest do
       other_user =
         insert(:user,
           local: false,
-          follower_address: "http://localhost:4001/users/masto_closed/followers",
-          following_address: "http://localhost:4001/users/masto_closed/following",
+          follower_address: "http://remote.org/users/masto_closed/followers",
+          following_address: "http://remote.org/users/masto_closed/following",
           ap_enabled: true
         )
 
@@ -2316,8 +2249,8 @@ defmodule Pleroma.UserTest do
       other_user =
         insert(:user,
           local: false,
-          follower_address: "http://localhost:4001/users/masto_closed/followers",
-          following_address: "http://localhost:4001/users/masto_closed/following",
+          follower_address: "http://remote.org/users/masto_closed/followers",
+          following_address: "http://remote.org/users/masto_closed/following",
           ap_enabled: true
         )
 

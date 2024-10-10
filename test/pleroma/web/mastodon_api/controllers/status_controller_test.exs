@@ -111,7 +111,7 @@ defmodule Pleroma.Web.MastodonAPI.StatusControllerTest do
       # 2 hours
       expires_in = 2 * 60 * 60
 
-      expires_at = DateTime.add(DateTime.utc_now(), expires_in)
+      expires_at1 = DateTime.add(DateTime.utc_now(), expires_in)
 
       conn_four =
         conn
@@ -123,12 +123,16 @@ defmodule Pleroma.Web.MastodonAPI.StatusControllerTest do
 
       assert %{"id" => fourth_id} = json_response_and_validate_schema(conn_four, 200)
 
-      assert Activity.get_by_id(fourth_id)
+      activity = Activity.get_by_id(fourth_id)
+      assert activity
+
+      {:ok, expires_at2, _} = DateTime.from_iso8601(activity.data["expires_at"])
+      assert Timex.compare(expires_at1, expires_at2, :minutes) == 0
 
       assert_enqueued(
         worker: Pleroma.Workers.PurgeExpiredActivity,
         args: %{activity_id: fourth_id},
-        scheduled_at: expires_at
+        scheduled_at: expires_at2
       )
     end
 
@@ -148,16 +152,13 @@ defmodule Pleroma.Web.MastodonAPI.StatusControllerTest do
       activity = Activity.get_by_id_with_object(id)
       {:ok, expires_at, _} = DateTime.from_iso8601(activity.data["expires_at"])
 
-      assert Timex.diff(
-               expires_at,
-               DateTime.utc_now(),
-               :hours
-             ) == 23
+      expiry_delay = Timex.diff(expires_at, DateTime.utc_now(), :hours)
+      assert(expiry_delay in [23, 24])
 
       assert_enqueued(
         worker: Pleroma.Workers.PurgeExpiredActivity,
         args: %{activity_id: id},
-        scheduled_at: DateTime.add(DateTime.utc_now(), 1 * 60 * 60 * 24)
+        scheduled_at: expires_at
       )
     end
 
@@ -217,6 +218,28 @@ defmodule Pleroma.Web.MastodonAPI.StatusControllerTest do
         })
 
       assert json_response_and_validate_schema(conn, 200)
+    end
+
+    test "refuses to post non-owned media", %{conn: conn} do
+      other_user = insert(:user)
+
+      file = %Plug.Upload{
+        content_type: "image/jpeg",
+        path: Path.absname("test/fixtures/image.jpg"),
+        filename: "an_image.jpg"
+      }
+
+      {:ok, upload} = ActivityPub.upload(file, actor: other_user.ap_id)
+
+      conn =
+        conn
+        |> put_req_header("content-type", "application/json")
+        |> post("/api/v1/statuses", %{
+          "status" => "mew",
+          "media_ids" => [to_string(upload.id)]
+        })
+
+      assert json_response(conn, 422) == %{"error" => "forbidden"}
     end
 
     test "posting a status with an invalid language", %{conn: conn} do
@@ -339,59 +362,6 @@ defmodule Pleroma.Web.MastodonAPI.StatusControllerTest do
         |> Kernel.put_in(["pleroma", "conversation_id"], nil)
 
       assert real_status == fake_status
-    end
-
-    test "fake statuses' preview card is not cached", %{conn: conn} do
-      clear_config([:rich_media, :enabled], true)
-
-      Tesla.Mock.mock_global(fn
-        %{
-          method: :get,
-          url: "https://example.com/twitter-card"
-        } ->
-          %Tesla.Env{status: 200, body: File.read!("test/fixtures/rich_media/twitter_card.html")}
-
-        env ->
-          apply(HttpRequestMock, :request, [env])
-      end)
-
-      conn1 =
-        conn
-        |> put_req_header("content-type", "application/json")
-        |> post("/api/v1/statuses", %{
-          "status" => "https://example.com/ogp",
-          "preview" => true
-        })
-
-      conn2 =
-        conn
-        |> put_req_header("content-type", "application/json")
-        |> post("/api/v1/statuses", %{
-          "status" => "https://example.com/twitter-card",
-          "preview" => true
-        })
-
-      assert %{"card" => %{"title" => "The Rock"}} = json_response_and_validate_schema(conn1, 200)
-
-      assert %{"card" => %{"title" => "Small Island Developing States Photo Submission"}} =
-               json_response_and_validate_schema(conn2, 200)
-    end
-
-    test "posting a status with OGP link preview", %{conn: conn} do
-      Tesla.Mock.mock_global(fn env -> apply(HttpRequestMock, :request, [env]) end)
-      clear_config([:rich_media, :enabled], true)
-
-      conn =
-        conn
-        |> put_req_header("content-type", "application/json")
-        |> post("/api/v1/statuses", %{
-          "status" => "https://example.com/ogp"
-        })
-
-      assert %{"id" => id, "card" => %{"title" => "The Rock"}} =
-               json_response_and_validate_schema(conn, 200)
-
-      assert Activity.get_by_id(id)
     end
 
     test "posting a direct status", %{conn: conn} do
@@ -566,6 +536,29 @@ defmodule Pleroma.Web.MastodonAPI.StatusControllerTest do
                json_response_and_validate_schema(conn, 200)
 
       assert %{"type" => "image"} = media_attachment
+    end
+
+    test "refuses to schedule post with non-owned media", %{conn: conn} do
+      other_user = insert(:user)
+
+      file = %Plug.Upload{
+        content_type: "image/jpeg",
+        path: Path.absname("test/fixtures/image.jpg"),
+        filename: "an_image.jpg"
+      }
+
+      {:ok, upload} = ActivityPub.upload(file, actor: other_user.ap_id)
+
+      conn =
+        conn
+        |> put_req_header("content-type", "application/json")
+        |> post("/api/v1/statuses", %{
+          "status" => "mew",
+          "scheduled_at" => DateTime.add(DateTime.utc_now(), 6, :minute),
+          "media_ids" => [to_string(upload.id)]
+        })
+
+      assert json_response(conn, 403) == %{"error" => "Access denied"}
     end
 
     test "skips the scheduling and creates the activity if scheduled_at is earlier than 5 minutes from now",
@@ -1405,7 +1398,7 @@ defmodule Pleroma.Web.MastodonAPI.StatusControllerTest do
       %{conn: conn} = oauth_access(["write:accounts", "write:statuses"])
       expires_in = 2 * 60 * 60
 
-      expires_at = DateTime.add(DateTime.utc_now(), expires_in)
+      expires_at1 = DateTime.add(DateTime.utc_now(), expires_in)
 
       assert %{"id" => id} =
                conn
@@ -1416,10 +1409,15 @@ defmodule Pleroma.Web.MastodonAPI.StatusControllerTest do
                })
                |> json_response_and_validate_schema(200)
 
+      activity = Activity.get_by_id(id)
+      {:ok, expires_at2, _} = DateTime.from_iso8601(activity.data["expires_at"])
+
+      assert Timex.compare(expires_at1, expires_at2, :minutes) == 0
+
       assert_enqueued(
         worker: Pleroma.Workers.PurgeExpiredActivity,
         args: %{activity_id: id},
-        scheduled_at: expires_at
+        scheduled_at: expires_at2
       )
 
       assert %{"id" => ^id, "pinned" => true} =
@@ -1431,7 +1429,7 @@ defmodule Pleroma.Web.MastodonAPI.StatusControllerTest do
       refute_enqueued(
         worker: Pleroma.Workers.PurgeExpiredActivity,
         args: %{activity_id: id},
-        scheduled_at: expires_at
+        scheduled_at: expires_at2
       )
 
       assert %{"id" => ^id, "pinned" => false} =
@@ -1443,7 +1441,7 @@ defmodule Pleroma.Web.MastodonAPI.StatusControllerTest do
       assert_enqueued(
         worker: Pleroma.Workers.PurgeExpiredActivity,
         args: %{activity_id: id},
-        scheduled_at: expires_at
+        scheduled_at: expires_at2
       )
     end
   end
@@ -1944,7 +1942,7 @@ defmodule Pleroma.Web.MastodonAPI.StatusControllerTest do
              |> json_response_and_validate_schema(:ok)
 
     {:ok, a_expires_at, 0} = DateTime.from_iso8601(a_expires_at)
-    assert DateTime.diff(expires_at, a_expires_at) == 0
+    assert Timex.compare(expires_at, a_expires_at, :minutes) == 0
 
     %{conn: conn} = oauth_access(["read:statuses"])
 
@@ -2398,6 +2396,25 @@ defmodule Pleroma.Web.MastodonAPI.StatusControllerTest do
         |> json_response_and_validate_schema(200)
 
       assert [%{"id" => ^attachment_id}] = response["media_attachments"]
+    end
+
+    test "it does not update to non-owned attachments", %{conn: conn, user: user} do
+      other_user = insert(:user)
+      attachment = insert(:attachment, user: other_user)
+      attachment_id = to_string(attachment.id)
+
+      {:ok, activity} = CommonAPI.post(user, %{status: "mew mew #abc", spoiler_text: "#def"})
+
+      conn =
+        conn
+        |> put_req_header("content-type", "application/json")
+        |> put("/api/v1/statuses/#{activity.id}", %{
+          "status" => "mew mew #abc",
+          "spoiler_text" => "#def",
+          "media_ids" => [attachment_id]
+        })
+
+      assert json_response(conn, 400) == %{"error" => "internal_server_error"}
     end
 
     test "it does not update visibility", %{conn: conn, user: user} do

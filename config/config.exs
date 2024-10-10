@@ -61,11 +61,11 @@ config :pleroma, Pleroma.Captcha.Kocaptcha, endpoint: "https://captcha.kotobank.
 # Upload configuration
 config :pleroma, Pleroma.Upload,
   uploader: Pleroma.Uploaders.Local,
-  filters: [Pleroma.Upload.Filter.Dedupe],
+  filters: [],
   link_name: false,
-  proxy_remote: false,
   filename_display_max_length: 30,
-  base_url: nil
+  base_url: nil,
+  allowed_mime_types: ["image", "audio", "video"]
 
 config :pleroma, Pleroma.Uploaders.Local, uploads: "uploads"
 
@@ -148,17 +148,37 @@ config :logger, :ex_syslogger,
   format: "$metadata[$level] $message",
   metadata: [:request_id]
 
+# ———————————————————————————————————————————————————————————————
+#                       W  A  R  N  I  N  G
+# ———————————————————————————————————————————————————————————————
+#
+#  Whenever adding a privileged new custom type for e.g.
+#  ActivityPub objects, ALWAYS map their extension back
+#  to "application/octet-stream".
+#  Else files served by us can automatically end up with
+#  those privileged types causing severe security hazards.
+#  (We need those mappings so Phoenix can assoiate its format
+#   (the "extension") to incoming requests of those MIME types)
+#
+# ———————————————————————————————————————————————————————————————
 config :mime, :types, %{
   "application/xml" => ["xml"],
   "application/xrd+xml" => ["xrd+xml"],
   "application/jrd+json" => ["jrd+json"],
   "application/activity+json" => ["activity+json"],
-  "application/ld+json" => ["activity+json"]
+  "application/ld+json" => ["activity+json"],
+  # Can be removed when bumping MIME past 2.0.5
+  # see https://akkoma.dev/AkkomaGang/akkoma/issues/657
+  "image/apng" => ["apng"]
 }
 
 config :mime, :extensions, %{
-  "activity+json" => "application/activity+json"
+  "xrd+xml" => "text/plain",
+  "jrd+json" => "text/plain",
+  "activity+json" => "text/plain"
 }
+
+# ———————————————————————————————————————————————————————————————
 
 config :tesla, :adapter, {Tesla.Adapter.Finch, name: MyFinch}
 
@@ -168,8 +188,10 @@ config :pleroma, :http,
   receive_timeout: :timer.seconds(15),
   proxy_url: nil,
   user_agent: :default,
-  pool_size: 50,
-  adapter: []
+  pool_size: 10,
+  adapter: [],
+  # see: https://hexdocs.pm/finch/Finch.html#start_link/1
+  pool_max_idle_time: :timer.seconds(30)
 
 config :pleroma, :instance,
   name: "Akkoma",
@@ -416,8 +438,12 @@ config :pleroma, :rich_media,
     Pleroma.Web.RichMedia.Parsers.TwitterCard,
     Pleroma.Web.RichMedia.Parsers.OEmbed
   ],
-  failure_backoff: :timer.minutes(20),
-  ttl_setters: [Pleroma.Web.RichMedia.Parser.TTL.AwsSignedUrl]
+  failure_backoff: 60_000,
+  ttl_setters: [
+    Pleroma.Web.RichMedia.Parser.TTL.AwsSignedUrl,
+    Pleroma.Web.RichMedia.Parser.TTL.Opengraph
+  ],
+  max_body: 5_000_000
 
 config :pleroma, :media_proxy,
   enabled: false,
@@ -555,7 +581,9 @@ config :pleroma, Oban,
     mute_expire: 5,
     search_indexing: 10,
     nodeinfo_fetcher: 1,
-    database_prune: 1
+    database_prune: 1,
+    rich_media_backfill: 2,
+    rich_media_expiration: 2
   ],
   plugins: [
     Oban.Plugins.Pruner,
@@ -571,7 +599,8 @@ config :pleroma, :workers,
   retries: [
     federator_incoming: 5,
     federator_outgoing: 5,
-    search_indexing: 2
+    search_indexing: 2,
+    rich_media_backfill: 3
   ],
   timeout: [
     activity_expiration: :timer.seconds(5),
@@ -593,7 +622,8 @@ config :pleroma, :workers,
     mute_expire: :timer.seconds(5),
     search_indexing: :timer.seconds(5),
     nodeinfo_fetcher: :timer.seconds(10),
-    database_prune: :timer.minutes(10)
+    database_prune: :timer.minutes(10),
+    rich_media_backfill: :timer.seconds(30)
   ]
 
 config :pleroma, Pleroma.Formatter,
@@ -792,8 +822,10 @@ config :pleroma, :modules, runtime_dir: "instance/modules"
 config :pleroma, configurable_from_database: false
 
 config :pleroma, Pleroma.Repo,
-  parameters: [gin_fuzzy_search_limit: "500"],
-  prepare: :unnamed
+  parameters: [
+    gin_fuzzy_search_limit: "500",
+    plan_cache_mode: "force_custom_plan"
+  ]
 
 config :pleroma, :majic_pool, size: 2
 

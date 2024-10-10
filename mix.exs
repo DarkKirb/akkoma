@@ -4,7 +4,7 @@ defmodule Pleroma.Mixfile do
   def project do
     [
       app: :pleroma,
-      version: version("3.11.0"),
+      version: version("3.13.2"),
       elixir: "~> 1.14",
       elixirc_paths: elixirc_paths(Mix.env()),
       compilers: Mix.compilers(),
@@ -21,13 +21,13 @@ defmodule Pleroma.Mixfile do
       source_url: "https://akkoma.dev/AkkomaGang/akkoma",
       docs: [
         source_url_pattern: "https://akkoma.dev/AkkomaGang/akkoma/blob/develop/%{path}#L%{line}",
-        logo: "priv/static/images/logo.png",
-        extras: ["README.md", "CHANGELOG.md"] ++ Path.wildcard("docs/**/*.md"),
+        logo: "priv/static/logo-512.png",
+        extras: ["README.md", "CHANGELOG.md"] ++ Path.wildcard("docs/docs/**/*.md"),
         groups_for_extras: [
-          "Installation manuals": Path.wildcard("docs/installation/*.md"),
-          Configuration: Path.wildcard("docs/config/*.md"),
-          Administration: Path.wildcard("docs/admin/*.md"),
-          "Pleroma's APIs and Mastodon API extensions": Path.wildcard("docs/api/*.md")
+          "Installation manuals": Path.wildcard("docs/docs/installation/*.md"),
+          Configuration: Path.wildcard("docs/docs/config/*.md"),
+          Administration: Path.wildcard("docs/docs/admin/*.md"),
+          "Pleroma's APIs and Mastodon API extensions": Path.wildcard("docs/docs/api/*.md")
         ],
         main: "readme",
         output: "priv/static/doc"
@@ -78,7 +78,8 @@ defmodule Pleroma.Mixfile do
         :comeonin,
         :fast_sanitize,
         :os_mon,
-        :ssl
+        :ssl,
+        :recon
       ],
       included_applications: [:ex_syslogger]
     ]
@@ -157,10 +158,10 @@ defmodule Pleroma.Mixfile do
       {:floki, "~> 0.34"},
       {:timex, "~> 3.7"},
       {:ueberauth, "== 0.10.8"},
-      {:linkify, git: "https://akkoma.dev/AkkomaGang/linkify.git"},
+      {:linkify, "~> 0.5.3"},
       {:http_signatures,
        git: "https://akkoma.dev/AkkomaGang/http_signatures.git",
-       ref: "6640ce7d24c783ac2ef56e27d00d12e8dc85f396"},
+       ref: "d44c43d66758c6a73eaa4da9cffdbee0c5da44ae"},
       {:telemetry, "~> 1.2"},
       {:telemetry_poller, "~> 1.0"},
       {:telemetry_metrics, "~> 1.0"},

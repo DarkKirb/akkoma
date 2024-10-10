@@ -100,18 +100,23 @@ config :pleroma, :config_description, [
         label: "Base URL",
         type: :string,
         description:
-          "Base URL for the uploads. Required if you use a CDN or host attachments under a different domain.",
+          "Base URL for the uploads. Required if you use a CDN or host attachments under a different domain - it is HIGHLY recommended that you **do not** set this to be the same as the domain akkoma is hosted on.",
         suggestions: [
-          "https://cdn-host.com"
+          "https://media.akkoma.dev/media/"
         ]
       },
       %{
-        key: :proxy_remote,
-        type: :boolean,
-        description: """
-        Proxy requests to the remote uploader.\n
-        Useful if media upload endpoint is not internet accessible.
-        """
+        key: :allowed_mime_types,
+        label: "Allowed MIME types",
+        type: {:list, :string},
+        description:
+          "List of MIME (main) types uploads are allowed to identify themselves with. Other types may still be uploaded, but will identify as a generic binary to clients. WARNING: Loosening this over the defaults can lead to security issues. Removing types is safe, but only add to the list if you are sure you know what you are doing.",
+        suggestions: [
+          "image",
+          "audio",
+          "video",
+          "font"
+        ]
       },
       %{
         key: :filename_display_max_length,
@@ -206,6 +211,26 @@ config :pleroma, :config_description, [
         suggestions: [
           "custom-file-name.{extension}"
         ]
+      }
+    ]
+  },
+  %{
+    group: :pleroma,
+    key: Pleroma.Upload.Filter.Exiftool.StripMetadata,
+    type: :group,
+    description: "Strip specified metadata from image uploads",
+    children: [
+      %{
+        key: :purge,
+        description: "Metadata fields or groups to strip",
+        type: {:list, :string},
+        suggestions: ["all", "CommonIFD0"]
+      },
+      %{
+        key: :preserve,
+        description: "Metadata fields or groups to preserve (takes precedence over stripping)",
+        type: {:list, :string},
+        suggestions: ["ColorSpaces", "Orientation"]
       }
     ]
   },
@@ -2684,8 +2709,8 @@ config :pleroma, :config_description, [
       %{
         key: :pool_size,
         type: :integer,
-        description: "Number of concurrent outbound HTTP requests to allow. Default 50.",
-        suggestions: [50]
+        description: "Number of concurrent outbound HTTP requests to allow PER HOST. Default 10.",
+        suggestions: [10]
       },
       %{
         key: :adapter,
@@ -2708,6 +2733,13 @@ config :pleroma, :config_description, [
             ]
           }
         ]
+      },
+      %{
+        key: :pool_max_idle_time,
+        type: :integer,
+        description:
+          "Number of seconds to retain an HTTP pool; pool will remain if actively in use. Default 30 seconds (in ms).",
+        suggestions: [30_000]
       }
     ]
   },

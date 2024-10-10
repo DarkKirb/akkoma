@@ -22,6 +22,43 @@ defmodule Pleroma.Config.DeprecationWarnings do
      "\n* `config :pleroma, :instance, :quarantined_instances` is now covered by `:pleroma, :mrf_simple, :reject`"}
   ]
 
+  def check_exiftool_filter do
+    filters = Config.get([Pleroma.Upload]) |> Keyword.get(:filters, [])
+
+    if Pleroma.Upload.Filter.Exiftool in filters do
+      Logger.warning("""
+      !!!DEPRECATION WARNING!!!
+      Your config is using Exiftool as a filter instead of Exiftool.StripMetadata. This should work for now, but you are advised to change to the new configuration to prevent possible issues later:
+
+      ```
+      config :pleroma, Pleroma.Upload,
+        filters: [Pleroma.Upload.Filter.Exiftool]
+      ```
+
+      Is now
+
+
+      ```
+      config :pleroma, Pleroma.Upload,
+        filters: [Pleroma.Upload.Filter.Exiftool.StripMetadata]
+      ```
+      """)
+
+      new_config =
+        filters
+        |> Enum.map(fn
+          Pleroma.Upload.Filter.Exiftool -> Pleroma.Upload.Filter.Exiftool.StripMetadata
+          filter -> filter
+        end)
+
+      Config.put([Pleroma.Upload, :filters], new_config)
+
+      :error
+    else
+      :ok
+    end
+  end
+
   def check_simple_policy_tuples do
     has_strings =
       Config.get([:mrf_simple])
@@ -182,7 +219,10 @@ defmodule Pleroma.Config.DeprecationWarnings do
       check_quarantined_instances_tuples(),
       check_transparency_exclusions_tuples(),
       check_simple_policy_tuples(),
-      check_http_adapter()
+      check_http_adapter(),
+      check_uploader_base_url_set(),
+      check_uploader_base_url_is_not_base_domain(),
+      check_exiftool_filter()
     ]
     |> Enum.reduce(:ok, fn
       :ok, :ok -> :ok
@@ -336,5 +376,55 @@ defmodule Pleroma.Config.DeprecationWarnings do
     else
       :ok
     end
+  end
+
+  def check_uploader_base_url_set() do
+    uses_local_uploader? = Config.get([Pleroma.Upload, :uploader]) == Pleroma.Uploaders.Local
+    base_url = Pleroma.Config.get([Pleroma.Upload, :base_url])
+
+    if base_url || !uses_local_uploader? do
+      :ok
+    else
+      Logger.error("""
+      !!!WARNING!!!
+      Your config does not specify a base_url for uploads!
+      Please make the following change:\n
+      \n* `config :pleroma, Pleroma.Upload, base_url: "https://example.com/media/`
+      \n
+      \nPlease note that it is HEAVILY recommended to use a subdomain to host user-uploaded media!
+      """)
+
+      # This is a hard exit - the uploader will not work without a base_url
+      raise ArgumentError, message: "No base_url set for uploads - please set one in your config!"
+    end
+  end
+
+  def check_uploader_base_url_is_not_base_domain() do
+    uses_local_uploader? = Config.get([Pleroma.Upload, :uploader]) == Pleroma.Uploaders.Local
+
+    uploader_host =
+      [Pleroma.Upload, :base_url]
+      |> Pleroma.Config.get()
+      |> URI.parse()
+      |> Map.get(:host)
+
+    akkoma_host =
+      [Pleroma.Web.Endpoint, :url]
+      |> Pleroma.Config.get()
+      |> Keyword.get(:host)
+
+    if uploader_host == akkoma_host && uses_local_uploader? do
+      Logger.error("""
+      !!!WARNING!!!
+      Your Akkoma Host and your Upload base_url's host are the same!
+      This can potentially be insecure!
+
+      It is HIGHLY recommended that you migrate your media uploads
+      to a subdomain at your earliest convenience
+      """)
+    end
+
+    # This isn't actually an error condition, just a warning
+    :ok
   end
 end
