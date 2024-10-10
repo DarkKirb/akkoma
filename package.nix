@@ -214,7 +214,7 @@ in
                   "application/ld+json" => ["activity+json"]
                 }
                 config :mime, :extensions, %{
-                  "activity+json" => "application/activity+json",
+                  "activity+json" => "text/plain",
                   "jrd+json" => "text/plain",
                   "xrd+xml" => "text/plain"
                 }
