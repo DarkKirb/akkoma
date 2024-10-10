@@ -251,7 +251,6 @@ in
           "ueberauth"
           "swoosh"
           "phoenix_swoosh"
-          "telemetry_metrics_prometheus"
         ]);
     };
 

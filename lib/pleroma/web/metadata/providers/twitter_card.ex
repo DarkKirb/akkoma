@@ -32,30 +32,13 @@ defmodule Pleroma.Web.Metadata.Providers.TwitterCard do
       end
 
     [
-      {:meta,
-        [
-          property: "twitter:card",
-          content: "summary"
-        ], []},
-      {:meta,
-       [
-         property: "twitter:title",
-         content: Utils.user_name_string(user)
-       ], []},
-      {:meta, [property: "twitter:url", content: url], []},
-      {:meta,
-       [
-         property: "twitter:description",
-         content: scrubbed_content
-       ], []},
-      {:meta, [property: "twitter:type", content: "article"], []}
+      title_tag(user),
+      {:meta, [name: "twitter:description", content: scrubbed_content], []}
     ] ++
       if attachments == [] or Metadata.activity_nsfw?(object) do
         [
-          {:meta, [property: "twitter:image", content: MediaProxy.preview_url(User.avatar_url(user))],
-           []},
-          {:meta, [property: "twitter:image:width", content: 150], []},
-          {:meta, [property: "twitter:image:height", content: 150], []}
+          image_tag(user),
+          {:meta, [name: "twitter:card", content: "summary"], []}
         ]
       else
         attachments
@@ -94,12 +77,13 @@ defmodule Pleroma.Web.Metadata.Providers.TwitterCard do
     Enum.reduce(attachments, [], fn attachment, acc ->
       rendered_tags =
         Enum.reduce(attachment["url"], [], fn url, acc ->
-          # TODO: Whatsapp only wants JPEG or PNGs. It seems that if we add a second twitter:image
-          # object when a Video or GIF is attached it will display that in Whatsapp Rich Preview.
           case Utils.fetch_media_type(@media_types, url["mediaType"]) do
             "audio" ->
               [
-                {:meta, [property: "twitter:audio", content: MediaProxy.url(url["href"])], []}
+                {:meta, [name: "twitter:card", content: "player"], []},
+                {:meta, [name: "twitter:player:width", content: "480"], []},
+                {:meta, [name: "twitter:player:height", content: "80"], []},
+                {:meta, [name: "twitter:player", content: player_url(id)], []}
                 | acc
               ]
 
@@ -110,19 +94,32 @@ defmodule Pleroma.Web.Metadata.Providers.TwitterCard do
             # workaround.
             "image" ->
               [
-                {:meta, [property: "twitter:image", content: MediaProxy.url(url["href"])], []},
-                {:meta, [property: "twitter:image:alt", content: attachment["name"]], []}
+                {:meta, [name: "twitter:card", content: "summary_large_image"], []},
+                {:meta,
+                 [
+                   name: "twitter:player",
+                   content: MediaProxy.url(url["href"])
+                 ], []}
                 | acc
               ]
               |> maybe_add_dimensions(url)
 
             "video" ->
+              # fallback to old placeholder values
+              height = url["height"] || 480
+              width = url["width"] || 480
+
               [
-                {:meta, [property: "twitter:video", content: MediaProxy.url(url["href"])], []}
+                {:meta, [name: "twitter:card", content: "player"], []},
+                {:meta, [name: "twitter:player", content: player_url(id)], []},
+                {:meta, [name: "twitter:player:width", content: "#{width}"], []},
+                {:meta, [name: "twitter:player:height", content: "#{height}"], []},
+                {:meta, [name: "twitter:player:stream", content: MediaProxy.url(url["href"])],
+                 []},
+                {:meta, [name: "twitter:player:stream:content_type", content: url["mediaType"]],
+                 []}
                 | acc
               ]
-              |> maybe_add_dimensions(url)
-              |> maybe_add_video_thumbnail(url)
 
             _ ->
               acc
@@ -133,35 +130,21 @@ defmodule Pleroma.Web.Metadata.Providers.TwitterCard do
     end)
   end
 
-  defp build_attachments(_), do: []
+  defp build_attachments(_id, _object), do: []
 
-  # We can use url["mediaType"] to dynamically fill the metadata
+  defp player_url(id) do
+    url(~p[/notice/#{id}/embed_player])
+  end
+
+  # Videos have problems without dimensions, but we used to not provide WxH for images.
+  # A default (read: incorrect) fallback for images is likely to cause rendering bugs.
   defp maybe_add_dimensions(metadata, url) do
-    type = url["mediaType"] |> String.split("/") |> List.first()
-
     cond do
       !is_nil(url["height"]) && !is_nil(url["width"]) ->
         metadata ++
           [
-            {:meta, [property: "twitter:#{type}:width", content: "#{url["width"]}"], []},
-            {:meta, [property: "twitter:#{type}:height", content: "#{url["height"]}"], []}
-          ]
-
-      true ->
-        metadata
-    end
-  end
-
-  # Media Preview Proxy makes thumbnails of videos without resizing, so we can trust the
-  # width and height of the source video.
-  defp maybe_add_video_thumbnail(metadata, url) do
-    cond do
-      Pleroma.Config.get([:media_preview_proxy, :enabled], false) ->
-        metadata ++
-          [
-            {:meta, [property: "twitter:image:width", content: "#{url["width"]}"], []},
-            {:meta, [property: "twitter:image:height", content: "#{url["height"]}"], []},
-            {:meta, [property: "twitter:image", content: MediaProxy.preview_url(url["href"])], []}
+            {:meta, [name: "twitter:player:width", content: "#{url["width"]}"], []},
+            {:meta, [name: "twitter:player:height", content: "#{url["height"]}"], []}
           ]
 
       true ->
