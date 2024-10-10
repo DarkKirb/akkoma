@@ -1287,12 +1287,12 @@
 
     remote_ip = buildMix rec {
       name = "remote_ip";
-      version = "1.1.0";
+      version = "1.2.0";
 
       src = fetchHex {
         pkg = "remote_ip";
         version = "${version}";
-        sha256 = "616ffdf66aaad6a72fc546dabf42eed87e2a99e97b09cbd92b10cc180d02ed74";
+        sha256 = "2ff91de19c48149ce19ed230a81d377186e4412552a597d6a5137373e5877cb7";
       };
 
       beamDeps = [combine plug];
