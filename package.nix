@@ -207,11 +207,12 @@ in
               cfgFile = writeText "config.exs" ''
                 use Mix.Config
                 config :mime, :types, %{
+                  "application/activity+json" => ["activity+json"],
+                  "application/jrd+json" => ["jrd+json"],
+                  "application/ld+json" => ["activity+json"],
                   "application/xml" => ["xml"],
                   "application/xrd+xml" => ["xrd+xml"],
-                  "application/jrd+json" => ["jrd+json"],
-                  "application/activity+json" => ["activity+json"],
-                  "application/ld+json" => ["activity+json"]
+                  "image/apng" => ["apng"]
                 }
                 config :mime, :extensions, %{
                   "activity+json" => "text/plain",
