@@ -52,12 +52,12 @@
 
     bcrypt_elixir = buildMix rec {
       name = "bcrypt_elixir";
-      version = "3.0.1";
+      version = "3.2.0";
 
       src = fetchHex {
         pkg = "bcrypt_elixir";
         version = "${version}";
-        sha256 = "486bb95efb645d1efc6794c1ddd776a186a9a713abf06f45708a6ce324fb96cf";
+        sha256 = "563e92a6c77d667b19c5f4ba17ab6d440a085696bdf4c68b9b0f5b30bc5422b8";
       };
 
       beamDeps = [comeonin elixir_make];
