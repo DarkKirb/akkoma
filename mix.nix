@@ -533,12 +533,12 @@
 
     excoveralls = buildMix rec {
       name = "excoveralls";
-      version = "0.18.1";
+      version = "0.18.3";
 
       src = fetchHex {
         pkg = "excoveralls";
         version = "${version}";
-        sha256 = "d65f79db146bb20399f23046015974de0079668b9abb2f5aac074d078da60b8d";
+        sha256 = "746f404fcd09d5029f1b211739afb8fb8575d775b21f6a3908e7ce3e640724c6";
       };
 
       beamDeps = [castore jason];
