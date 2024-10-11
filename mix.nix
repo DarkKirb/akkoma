@@ -1235,12 +1235,12 @@
 
     postgrex = buildMix rec {
       name = "postgrex";
-      version = "0.18.0";
+      version = "0.19.1";
 
       src = fetchHex {
         pkg = "postgrex";
         version = "${version}";
-        sha256 = "a042989ba1bc1cca7383ebb9e461398e3f89f868c92ce6671feb7ef132a252d1";
+        sha256 = "8bac7885a18f381e091ec6caf41bda7bb8c77912bb0e9285212829afe5d8a8f8";
       };
 
       beamDeps = [db_connection decimal jason];
