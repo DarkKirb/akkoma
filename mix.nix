@@ -91,15 +91,15 @@
 
     cachex = buildMix rec {
       name = "cachex";
-      version = "3.6.0";
+      version = "4.0.1";
 
       src = fetchHex {
         pkg = "cachex";
         version = "${version}";
-        sha256 = "ebf24e373883bc8e0c8d894a63bbe102ae13d918f790121f5cfe6e485cc8e2e2";
+        sha256 = "e9caccc066c6cdc312077f4ae36b7b13a2e9acf826cc22537999331c781b2474";
       };
 
-      beamDeps = [eternal jumper sleeplocks unsafe];
+      beamDeps = [eternal ex_hash_ring jumper sleeplocks unsafe];
     };
 
     calendar = buildMix rec {
@@ -503,6 +503,19 @@
       };
 
       beamDeps = [earmark_parser makeup_elixir makeup_erlang];
+    };
+
+    ex_hash_ring = buildMix rec {
+      name = "ex_hash_ring";
+      version = "6.0.4";
+
+      src = fetchHex {
+        pkg = "ex_hash_ring";
+        version = "${version}";
+        sha256 = "89adabf31f7d3dfaa36802ce598ce918e9b5b33bae8909ac1a4d052e1e567d18";
+      };
+
+      beamDeps = [];
     };
 
     ex_machina = buildMix rec {
